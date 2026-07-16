@@ -2,29 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Import DGEM Design System (tokens + typography + components + utilities) */
+/* Import DGEM Design System — tokens, typography, components, utilities.
+   All base resets (box-sizing, html/body height, body font, #root) are
+   handled inside the package's Tailwind plugin, so nothing else is needed here. */
 @import "@dgem/design-system";
-
-/* ── Global Resets ── */
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: var(--font-sans);
-  font-size: 0.875rem;   /* 14px – DGEM body default */
-  font-weight: 400;
-  color: var(--color-foreground);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#root {
-  height: 100%;
-}

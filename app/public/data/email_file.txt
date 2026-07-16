@@ -1,0 +1,56 @@
+From: Jane Smith <jane.smith@acmecorp.com>
+To: finance-je@acmecorp.com
+Subject: JE - June Accruals - Marketing Dept
+Date: Fri, 30 Jun 2025 17:05:00 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+
+Hi team,
+
+Please post the following accrual entry for June 2025:
+
+Journal Type : Accrual_Details
+Reference    : ACM-JUL-2025-050
+Period       : 06
+Company Code : 1000
+Currency     : USD
+
+| Line | Company Code | Cost Center | GL Account | Description                | Annual Amount | Dr/Cr |
+|------|--------------|-------------|------------|----------------------------|---------------|-------|
+|  1   | 1000         | 3100        | 6100100    | Marketing Expense - Events | 150000.00     | DR    |
+|  2   | 1000         | 5500        | 2100010    | Accrued Liabilities        | 150000.00     | CR    |
+|  3   | 1000         | 3100        | 6100200    | Digital Marketing Expense  | 96000.00      | DR    |
+|  4   | 1000         | 5500        | 2100010    | Accrued Liabilities        | 96000.00      | CR    |
+|  5   | 1000         | 3200        | 6100300    | Advertising Expense        | 62400.00      | DR    |
+|  6   | 1000         | 5500        | 2100010    | Accrued Liabilities        | 62400.00      | CR    |
+|  7   | 1000         | 3200        | 6100400    | Sponsorship Expense        | 36000.00      | DR    |
+|  8   | 1000         | 5500        | 2100010    | Accrued Liabilities        | 36000.00      | CR    |
+|  9   | 1000         | 3300        | 6100500    | Content Creation Expense   | 54000.00      | DR    |
+| 10   | 1000         | 5500        | 2100010    | Accrued Liabilities        | 54000.00      | CR    |
+| 11   | 1000         | 3300        | 6100600    | Market Research Expense    | 33600.00      | DR    |
+| 12   | 1000         | 5500        | 2100010    | Accrued Liabilities        | 33600.00      | CR    |
+| 13   | 1000         | 3400        | 6100700    | PR & Communications        | 48000.00      | DR    |
+| 14   | 1000         | 5500        | 2100010    | Accrued Liabilities        | 48000.00      | CR    |
+| 15   | 1000         | 3500        | 6100800    | Trade Show Expense         | 72000.00      | DR    |
+| 16   | 1000         | 5500        | 2100010    | Accrued Liabilities        | 72000.00      | CR    |
+| 17   | 1000         | 3500        | 3000100    | Equity Reserve             | 24000.00      | DR    |
+| 18   | 1000         | 5500        | 3000300    | Equity Adjustment          | 24000.00      | CR    |
+| 19   | 2000         | 3800        | 6100300    | Consulting Expense         | 45000.00      | DR    |
+| 20   | 2000         | 5500        | 2100010    | Accrued Liabilities        | 45000.00      | CR    |
+
+---
+
+Points to consider:
+
+Only company code 1000 is allowed for Accrual Journals.
+All Accrual Journals must use document type SA unless overridden.
+Calculate the monthly journal amount by dividing the total annual invoice amount by 12.
+Accrual input details are provided monthly by Marketing Department via email.
+Validate that company code, period, document type, cost center, and GL account are present and correct before posting.
+Accrual Journal must not contain GL account series 1000 or 3000.
+If any line is missing a cost center on an expense GL account (6100 series), reject the entire entry.
+Total debits must equal total credits for each reference - reject if imbalanced.
+
+Thanks,
+Jane
+

@@ -1,14 +1,16 @@
 import { create } from 'zustand'
 import type { User } from '@/types'
 
-const USER_STORAGE_KEY = 'r2a_user'
+const USER_STORAGE_KEY = 'user'
 
 const getStoredUser = (): User | null => {
   try {
     const raw = localStorage.getItem(USER_STORAGE_KEY)
     if (!raw) return null
+
     const parsed = JSON.parse(raw) as Partial<User>
     if (!parsed?.email || !parsed?.name) return null
+
     return {
       id: parsed.id ?? crypto.randomUUID(),
       name: parsed.name,
@@ -31,11 +33,13 @@ const persistUser = (user: User | null) => {
 const initialUser = getStoredUser()
 
 interface AppState {
+  // State
   user: User | null
   isAuthenticated: boolean
   isDarkMode: boolean
   isLoading: boolean
 
+  // Actions
   setUser: (user: User | null) => void
   login: (user: User) => void
   logout: () => void
@@ -45,7 +49,8 @@ interface AppState {
 }
 
 /**
- * App-wide Zustand store – authentication, theme, and loading state.
+ * App Store - Shared
+ * Manages global app state like user, theme, etc.
  */
 export const useAppStore = create<AppState>((set) => ({
   user: initialUser,
@@ -75,6 +80,7 @@ export const useAppStore = create<AppState>((set) => ({
 
   setDarkMode: (isDark) => {
     set({ isDarkMode: isDark })
+    // Apply dark mode to document
     if (isDark) {
       document.documentElement.classList.add('dark')
     } else {

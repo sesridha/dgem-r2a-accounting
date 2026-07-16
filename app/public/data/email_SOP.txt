@@ -1,0 +1,31 @@
+# Standard Operating Procedure: Email Accrual Journal Entry ProcessingOverview
+This Standard Operating Procedure (SOP) defines the rules and guidelines for processing Accrual Journal Entries submitted via email by the Marketing Department. It ensures consistency, accuracy, and compliance in the journal entry preparation and posting workflow.
+Source: accrual_june_2025_marketing.txt | Reference: ACM-JUN-2025-041 | Period: 06 | Currency: USD
+# Company Code Rules
+- Only company code 1000 is allowed for Accrual Journals.
+- Any journal entry submitted with a company code other than 1000 must be rejected and returned to the sender for correction.
+# Document Type
+- All Accrual Journals must use document type SA unless explicitly overridden by an authorised approver.
+- Document type overrides must be documented and approved before processing.
+# Monthly Amount Calculation
+- Calculate the monthly journal amount by dividing the total annual invoice amount by 12.
+- The raw annual amount is stored as received; the monthly posting amount is derived during the calculation step of the posting process.
+# Input & Submission Process
+- Accrual input details are provided monthly by the Marketing Department via email.
+- Emails must include all required header fields: Journal Type, Reference, Period, Company Code, and Currency.
+- Line items must be provided in the standard table format with Line, Company Code, Cost Center, GL Account, Description, Annual Amount, and Dr/Cr columns.
+# Validation Rules
+- Validate that company code, period, document type, cost center, and GL account are present and correct before posting.
+- Accrual Journal must not contain GL account series 1000 or 3000.
+- If any line is missing a cost center on an expense GL account (6100 series), reject the entire entry.
+- Total debits must equal total credits for each reference — reject if imbalanced.
+- Entries without an approver name must not be processed.
+# Rejection & Escalation
+- Any entry failing validation must be rejected in full — partial posting is not permitted.
+- Rejected entries must be returned to the submitter (Marketing Department) with a clear description of the validation failure.
+- Escalate unresolved rejections to the Finance Controller within 2 business days.
+# Approval Requirements
+- All journal entries must include an approver name before processing can begin.
+- Entries submitted without an approver name must be held and not posted until approval is confirmed.
+- Approver names must correspond to authorised signatories on the Finance Approval Register.
+ 

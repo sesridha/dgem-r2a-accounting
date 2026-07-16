@@ -1,0 +1,109 @@
+/*
+ * DGEM 2.0 Design System – CSS Design Tokens
+ *
+ * Canonical source of truth for all design tokens.
+ * Generated from Figma DGEM Design System.
+ *
+ * Usage: @import "@dgem/design-system/tokens";
+ */
+
+/* ─────────────────────────────────────────────
+   Google Fonts – Ubuntu
+   ───────────────────────────────────────────── */
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&family=Ubuntu+Mono:wght@400;700&display=swap");
+
+/* ─────────────────────────────────────────────
+   Light Theme (default)
+   ───────────────────────────────────────────── */
+:root {
+  /* ── Brand Colors ── */
+  --dgem-dark-blue: #121A38;
+  --dgem-blue: #0058AB;
+  --dgem-turquoise: #00D5D0;
+  --dgem-light-blue: #1DB8F2;
+  --dgem-white: #FFFFFF;
+
+  /* ── Neutral Scale ── */
+  --grey-50: #FAFAFA;
+  --grey-100: #F4F4F5;
+  --grey-200: #E5E5E5;
+  --grey-300: #CCCCCC;
+  --grey-400: #9A9A9A;
+  --grey-500: #8D8D8D;
+  --grey-600: #71717A;
+  --grey-700: #666666;
+  --grey-800: #A8A8A8;
+
+  /* ── Semantic Colors ── */
+  --color-red: #E30021;
+  --color-red-light: #FF816E;
+  --color-yellow: #FEB100;
+  --color-green: #17A34C;
+  --color-brown: #AA7243;
+
+  /* ── Theme Aliases ── */
+  --color-primary: var(--dgem-blue);
+  --color-primary-foreground: var(--dgem-white);
+  --color-secondary: var(--grey-100);
+  --color-secondary-foreground: var(--dgem-dark-blue);
+  --color-accent: var(--dgem-turquoise);
+  --color-accent-foreground: var(--dgem-dark-blue);
+  --color-destructive: var(--color-red);
+  --color-destructive-foreground: var(--dgem-white);
+  --color-muted: var(--grey-100);
+  --color-muted-foreground: var(--grey-600);
+  --color-background: var(--dgem-white);
+  --color-foreground: var(--dgem-dark-blue);
+  --color-border: var(--grey-200);
+  --color-ring: var(--dgem-blue);
+  --color-card: var(--grey-50);
+  --color-card-foreground: var(--dgem-dark-blue);
+  --color-page-bg: #F3F4F5;        /* Page/app background – warm light grey */
+
+  /* ── Typography ── */
+  --font-sans: "Ubuntu", sans-serif;
+  --font-mono: "Ubuntu Mono", monospace;
+
+  /* ── Shadows ── */
+  --shadow-sm: 0 1px 2px 0 rgba(18, 26, 56, 0.05);
+  --shadow: 0 1px 3px 0 rgba(18, 26, 56, 0.10), 0 1px 2px 0 rgba(18, 26, 56, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(18, 26, 56, 0.10), 0 2px 4px -1px rgba(18, 26, 56, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(18, 26, 56, 0.10), 0 4px 6px -2px rgba(18, 26, 56, 0.05);
+  /* Multi-layer card shadow – opt-in via .dgem-card--shadow (cards are flat by default) */
+  --shadow-card: 0 35px 14px 0 rgba(0,0,0,.01), 0 20px 12px 0 rgba(0,0,0,.03),
+                 0 9px 9px 0 rgba(0,0,0,.04), 0 2px 5px 0 rgba(0,0,0,.05);
+
+  /* ── Transitions ── */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─────────────────────────────────────────────
+   Dark Theme
+   ───────────────────────────────────────────── */
+.dark,
+[data-theme="dark"] {
+  --color-primary: var(--dgem-light-blue);
+  --color-primary-foreground: var(--dgem-dark-blue);
+  --color-secondary: #1E2548;
+  --color-secondary-foreground: var(--dgem-white);
+  --color-accent: var(--dgem-turquoise);
+  --color-accent-foreground: var(--dgem-dark-blue);
+  --color-destructive: var(--color-red-light);
+  --color-destructive-foreground: var(--dgem-dark-blue);
+  --color-muted: #1E2548;
+  --color-muted-foreground: var(--grey-400);
+  --color-background: var(--dgem-dark-blue);
+  --color-foreground: #FAFAFA;
+  --color-border: #2A3260;
+  --color-ring: var(--dgem-light-blue);
+  --color-card: #182044;
+  --color-card-foreground: #FAFAFA;
+  --color-page-bg: #0E1430;        /* Page/app background – deep navy (dark) */
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+}

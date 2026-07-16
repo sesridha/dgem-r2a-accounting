@@ -1,0 +1,91 @@
+/*
+ * DGEM Design System – Modal
+ *
+ * Partial of components.css. Do not import directly – import
+ * "@dgem/design-system/components" (the barrel) instead.
+ */
+
+@layer components {
+
+/* ═════════════════════════════════════════════
+   MODAL
+   Standard & Confirmation Dialog variants.
+   No separator borders between header/body/footer –
+   sections are separated by spacing alone.
+   ═════════════════════════════════════════════ */
+.dgem-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(18, 26, 56, 0.5);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  animation: dgem-modal-overlay-in 0.15s ease both;
+}
+@keyframes dgem-modal-overlay-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+/* Exit: overlay fades out – no pointer events during close */
+.dgem-modal-overlay.dgem-modal-closing {
+  animation: dgem-modal-overlay-out 0.15s ease both;
+  pointer-events: none;
+}
+@keyframes dgem-modal-overlay-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+.dgem-modal {
+  background-color: var(--color-background);
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow-xl, var(--shadow-lg));
+  max-width: 56rem;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: dgem-modal-panel-in 0.2s ease both;
+}
+@keyframes dgem-modal-panel-in {
+  from { opacity: 0; transform: scale(0.97) translateY(-8px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+/* Exit: panel scales down + fades out */
+.dgem-modal-closing .dgem-modal {
+  animation: dgem-modal-panel-out 0.15s ease both;
+}
+@keyframes dgem-modal-panel-out {
+  from { opacity: 1; transform: scale(1) translateY(0); }
+  to   { opacity: 0; transform: scale(0.97) translateY(-8px); }
+}
+.dgem-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+}
+.dgem-modal-body {
+  padding: 0 1.5rem 1.5rem;
+}
+.dgem-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+}
+
+/* ── Confirmation Dialog modifier ──
+   Compact modal for binary decisions (unsaved changes, delete, discard).
+   - Narrower width (28rem / 448px)
+   - Footer uses space-between: destructive left, safe right */
+.dgem-modal--confirm {
+  max-width: 28rem;
+}
+.dgem-modal--confirm .dgem-modal-footer {
+  justify-content: space-between;
+}
+
+}

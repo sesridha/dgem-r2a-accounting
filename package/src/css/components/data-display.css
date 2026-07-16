@@ -1,0 +1,312 @@
+/*
+ * DGEM Design System – Data display (tags, switcher, chips, cards, table)
+ *
+ * Partial of components.css. Do not import directly – import
+ * "@dgem/design-system/components" (the barrel) instead.
+ */
+
+@layer components {
+
+/* ═════════════════════════════════════════════
+   TAGS & LABELS
+   Figma: Grey, Dark Grey, News (New/Updated),
+          Status (Active/On hold/Draft/Scheduled/Completed)
+   ═════════════════════════════════════════════ */
+.dgem-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  font-weight: 400;
+  border-radius: 9999px;
+  white-space: nowrap;
+  background-color: var(--color-muted);
+  color: var(--color-muted-foreground);
+  transition: background-color var(--transition-base), color var(--transition-base);
+}
+
+/* Inverted tag – white bg, dark blue text; use inside a group-hover ancestor */
+.group:hover .dgem-tag,
+.dgem-card--interactive:hover .dgem-tag,
+.dgem-tag--inverted {
+  background-color: var(--dgem-white);
+  color: var(--dgem-blue);
+}
+
+.dgem-tag-grey {
+  background-color: var(--color-muted);
+  color: var(--color-muted-foreground);
+}
+.dgem-tag-dark {
+  background-color: var(--dgem-dark-blue);
+  color: var(--dgem-white);
+}
+
+/* News tags */
+.dgem-tag-new {
+  background-color: var(--dgem-blue);
+  color: var(--dgem-white);
+  font-size: 0.625rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.0625rem 0.375rem;
+  border-radius: 9999px;
+}
+.dgem-tag-updated {
+  background-color: var(--dgem-turquoise);
+  color: var(--dgem-dark-blue);
+  font-size: 0.625rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.0625rem 0.375rem;
+  border-radius: 9999px;
+}
+
+/* Status labels */
+.dgem-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 9999px;
+}
+.dgem-status-active    { background-color: #E8F5E9; color: var(--color-green); }
+.dgem-status-scheduled { background-color: #E3F2FD; color: var(--dgem-blue); }
+.dgem-status-completed { background-color: #F3E8FF; color: #7C3AED; }
+.dgem-status-on-hold   { background-color: #FFF8E1; color: var(--color-yellow); }
+.dgem-status-draft     { background-color: var(--color-muted); color: var(--color-muted-foreground); }
+.dgem-status-warning   { background-color: #FFF8E1; color: var(--color-yellow); }
+.dgem-status-error     { background-color: #FDECEA; color: var(--color-red); }
+.dgem-status-inactive  { background-color: var(--color-muted); color: var(--color-muted-foreground); }
+
+/* Preserve status badge colors inside interactive cards on hover */
+.dgem-card--interactive:hover .dgem-status-active    { color: var(--color-green); }
+.dgem-card--interactive:hover .dgem-status-scheduled { color: var(--dgem-blue); }
+.dgem-card--interactive:hover .dgem-status-completed { color: #7C3AED; }
+.dgem-card--interactive:hover .dgem-status-on-hold   { color: var(--color-yellow); }
+.dgem-card--interactive:hover .dgem-status-draft     { color: var(--color-muted-foreground); }
+
+
+/* ═════════════════════════════════════════════
+   SWITCHER (Segmented Control)
+   Figma: Pill container with selected/unselected segments
+   ═════════════════════════════════════════════ */
+.dgem-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  border-radius: 9999px;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-background);
+}
+.dgem-switcher-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.75rem;
+  padding: 0 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  font-weight: 400;
+  border-radius: 9999px;
+  border: none;
+  background-color: transparent;
+  color: var(--color-muted-foreground);
+  cursor: pointer;
+  transition: background-color var(--transition-base),
+  color var(--transition-base);
+  white-space: nowrap;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.dgem-switcher-item:hover:not(.dgem-switcher-item--active) {
+  background-color: var(--color-muted);
+}
+.dgem-switcher-item--active {
+  background-color: var(--color-primary);
+  color: var(--color-primary-foreground);
+  font-weight: 500;
+}
+.dgem-switcher-item__count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-left: 0.375rem;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  background-color: transparent;
+  color: inherit;
+  font-size: 0.55rem;
+  font-weight: 500;
+  line-height: 1;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.dgem-switcher-item--active .dgem-switcher-item__count {
+  border-color: var(--color-primary-foreground);
+  background-color: var(--color-primary-foreground);
+  color: var(--color-primary);
+}
+
+
+/* ═════════════════════════════════════════════
+   CHIPS
+   Figma: Small, Selected × Dark/Hover
+   ═════════════════════════════════════════════ */
+.dgem-chip {
+  display: inline-flex;
+  align-items: center;
+  height: 1.5rem;
+  padding: 0 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 400;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: background-color var(--transition-base),
+              color var(--transition-base);
+}
+.dgem-chip-default {
+  background-color: var(--color-muted);
+  color: var(--color-foreground);
+}
+.dgem-chip-default:hover {
+  background-color: var(--color-border);
+}
+.dgem-chip-selected {
+  background-color: var(--dgem-dark-blue);
+  color: var(--dgem-white);
+}
+.dgem-chip-selected:hover {
+  background-color: #1E2548;
+}
+
+
+/* ═════════════════════════════════════════════
+   CARDS
+   Figma: Card_Home (Default/Hover), BSV Alliance,
+          Digital Workers, 7 Planes
+   ═════════════════════════════════════════════ */
+.dgem-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-card);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 1rem;          /* 16px – correct DGEM card radius */
+  overflow: hidden;
+}
+/* Optional elevation – opt-in resting shadow (cards are flat by default) */
+.dgem-card--shadow {
+  box-shadow: var(--shadow-card);
+}
+/* Interactive card variant – flips to dark background on hover */
+.dgem-card--interactive {
+  cursor: pointer;
+  transition: background-color var(--transition-base),
+              color var(--transition-base),
+              box-shadow var(--transition-base);
+}
+.dgem-card--interactive:hover {
+  background-color: var(--dgem-dark-blue);
+  color: var(--dgem-white);
+  border-color: transparent;
+  box-shadow: 0 0 32px -4px rgba(0,0,0,.04), 0 8px 32px -2px rgba(0,0,0,.08);
+}
+/* Force all text inside interactive card to inherit white on hover */
+.dgem-card--interactive:hover h1,
+.dgem-card--interactive:hover h2,
+.dgem-card--interactive:hover h3,
+.dgem-card--interactive:hover h4,
+.dgem-card--interactive:hover p,
+.dgem-card--interactive:hover span,
+.dgem-card--interactive:hover svg {
+  color: var(--dgem-white);
+}
+/* Dark mode: flip to white background */
+.dark .dgem-card--interactive:hover {
+  background-color: var(--dgem-white);
+  color: var(--dgem-dark-blue);
+  border-color: transparent;
+}
+.dark .dgem-card--interactive:hover h1,
+.dark .dgem-card--interactive:hover h2,
+.dark .dgem-card--interactive:hover h3,
+.dark .dgem-card--interactive:hover h4,
+.dark .dgem-card--interactive:hover p,
+.dark .dgem-card--interactive:hover span,
+.dark .dgem-card--interactive:hover svg {
+  color: var(--dgem-dark-blue);
+}
+.dgem-card-body {
+  padding: 1rem;
+}
+
+
+/* ═════════════════════════════════════════════
+   TABLE
+   Figma: Cell label, Cell, Pagination
+   ═════════════════════════════════════════════ */
+.dgem-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  text-align: left;
+}
+.dgem-table th {
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+  font-size: 0.75rem;
+  color: var(--color-muted-foreground);
+  border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+}
+.dgem-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-foreground);
+}
+.dgem-table tr:last-child td {
+  border-bottom: none;
+}
+.dgem-table tr:hover {
+  background-color: var(--color-muted);
+}
+
+.dgem-pagination {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.dgem-pagination-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color var(--transition-base);
+}
+.dgem-pagination-item:hover {
+  background-color: var(--color-muted);
+}
+.dgem-pagination-item-active {
+  background-color: var(--color-primary);
+  color: var(--color-primary-foreground);
+}
+
+}

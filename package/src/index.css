@@ -1,0 +1,19 @@
+/*
+ * DGEM 2.0 Design System – Main Entry Point
+ *
+ * Import this file to get the complete DGEM design system.
+ *
+ * Usage (Tailwind project):
+ *   @tailwind base;
+ *   @tailwind components;
+ *   @tailwind utilities;
+ *   @import "@dgem/design-system";
+ *
+ * Usage (non-Tailwind project):
+ *   @import "@dgem/design-system";
+ */
+
+@import "./css/tokens.css";
+@import "./css/typography.css";
+@import "./css/components.css";
+@import "./css/utilities.css";

@@ -1,0 +1,184 @@
+/*
+ * DGEM Design System – Navigation (sidebar, tree, header, nav link, page background)
+ *
+ * Partial of components.css. Do not import directly – import
+ * "@dgem/design-system/components" (the barrel) instead.
+ */
+
+@layer components {
+
+/* ═════════════════════════════════════════════
+   SIDEBAR
+   Figma: Default_Left, Composer_Left/Right, Blueprints
+   ═════════════════════════════════════════════ */
+.dgem-sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: var(--color-card);
+  border-right: 1px solid var(--color-border);
+  overflow-y: auto;
+}
+.dgem-sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  color: var(--color-foreground);
+  text-decoration: none;
+  transition: background-color var(--transition-base);
+}
+.dgem-sidebar-link:hover {
+  background-color: var(--color-muted);
+}
+.dgem-sidebar-link-active {
+  background-color: var(--color-muted);
+  font-weight: 500;
+  color: var(--color-primary);
+}
+
+.dgem-sidebar-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+
+/* ═════════════════════════════════════════════
+   TREE MENU
+   Figma: Level 0–5, Checkbox, Caret, Trail
+   ═════════════════════════════════════════════ */
+.dgem-tree-item {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color var(--transition-base);
+}
+.dgem-tree-item:hover {
+  background-color: var(--color-muted);
+}
+.dgem-tree-indent-1 { padding-left: 1.25rem; }
+.dgem-tree-indent-2 { padding-left: 2.5rem; }
+.dgem-tree-indent-3 { padding-left: 3.75rem; }
+.dgem-tree-indent-4 { padding-left: 5rem; }
+.dgem-tree-indent-5 { padding-left: 6.25rem; }
+
+
+/* ═════════════════════════════════════════════
+   APP HEADER
+   Sticky white bar, 56 px tall.
+   Switches to dark navy in dark mode.
+   ═════════════════════════════════════════════ */
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 3.5rem;           /* 56px */
+  padding: 0 1.5rem;
+  background-color: var(--color-background);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+.dark .app-header,
+[data-theme="dark"] .app-header {
+  background-color: hsl(227 47% 15%);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+
+/* ═════════════════════════════════════════════
+   ANIMATED NAV LINK
+   Underline sweeps away (right → centre) then
+   re-appears (centre → left) on hover – the
+   shared animation from DGEM's design system.
+   ═════════════════════════════════════════════ */
+
+@keyframes text-underline {
+  0%   { background-size: 100% 1px; background-position: 100% 100%; }
+  50%  { background-size:   0  1px; background-position: 100% 100%; }
+  51%  { background-size:   0  1px; background-position:   0  100%; }
+  100% { background-size: 100% 1px; background-position:   0  100%; }
+}
+
+@keyframes text-underline2 {
+  0%   { background-size:   0  1px; background-position:   0  100%; }
+  50%  { background-size: 100% 1px; background-position:   0  100%; }
+  51%  { background-size: 100% 1px; background-position: 100% 100%; }
+  100% { background-size:   0  1px; background-position: 100% 100%; }
+}
+
+.dgem-nav-link {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;      /* 14px */
+  color: var(--color-foreground);
+  text-decoration: none;
+  /* Inactive default: no underline visible (background-size 0 1px).
+     Hover animates the underline in via @keyframes text-underline.
+     Active state (.dgem-nav-link--active or [aria-current]) shows
+     the underline persistently at 100% 1px. */
+  background: linear-gradient(to right, var(--color-foreground) 0%, var(--color-foreground) 100%)
+              no-repeat 0 100% / 0 1px;
+  padding-bottom: 2px;
+  transition: color var(--transition-base);
+}
+.dgem-nav-link:hover {
+  animation: text-underline 0.6s 1 forwards;
+}
+.dgem-nav-link--active,
+.dgem-nav-link[aria-current="page"],
+.dgem-nav-link[aria-current="true"] {
+  background-size: 100% 1px;
+}
+
+
+/* ═════════════════════════════════════════════
+   PAGE BACKGROUND & GRADIENT
+   The signature DGEM page chrome:
+   • html/body:  warm light grey (#F3F4F5)
+   • .gradient-bg:  fixed colorful overlay, blurred at low opacity
+   Always render .gradient-bg as the first child of <body>, with
+   aria-hidden="true". All content layers above it via z-index.
+   ═════════════════════════════════════════════ */
+
+/* Apply to <html> or <body> to set the characteristic DGEM page colour */
+.dgem-page-bg {
+  background-color: var(--color-page-bg);
+}
+
+/* Fixed colorful gradient overlay – produces the DGEM rainbow glow */
+.gradient-bg {
+  position: fixed;
+  inset: -200px;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(255,255,255,0.9) 0%,
+      rgba(255,255,255,0.6) 30%,
+      transparent 70%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,  47,  75, 0.12)   0%,
+      rgba(255, 178,  74, 0.12)  11%,
+      rgba(  0, 230, 227, 0.12) 41.5%,
+      rgba(  1, 176, 245, 0.12) 69.5%,
+      rgba(229,  87, 173, 0.12)  93%,
+      rgba(255,  47,  75, 0.12) 100%
+    );
+  filter: blur(100px);
+}
+
+}

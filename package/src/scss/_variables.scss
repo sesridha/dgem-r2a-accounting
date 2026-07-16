@@ -1,0 +1,100 @@
+// ─────────────────────────────────────────────
+// DGEM 2.0 Design System – SCSS Variables
+// Auto-generated from Figma design tokens.
+// Import as:  @use "@dgem/design-system/scss/variables" as dgem;
+// ─────────────────────────────────────────────
+
+// ── Brand ──
+$dgem-dark-blue:    #121A38;
+$dgem-blue:         #0058AB;
+$dgem-turquoise:    #00D5D0;
+$dgem-light-blue:   #1DB8F2;
+
+// ── Neutral / Grey Scale ──
+$white:             #FFFFFF;
+$black:             #000000;
+$bg-light-grey:     #FAFAFA;   // grey-50
+$bg-grey:           #F4F4F5;   // grey-100
+$border-light-grey: #E5E5E5;   // grey-200
+$border-grey:       #CCCCCC;   // grey-300
+$grey:              #9A9A9A;   // grey-400
+$grey2:             #8D8D8D;   // grey-500
+$text-grey:         #71717A;   // grey-600
+$grey3:             #666666;   // grey-700
+$silver:            #A8A8A8;   // grey-800
+
+// ── Semantic ──
+$red:               #E30021;
+$red2:              #FF816E;
+$yellow:            #FEB100;
+$green:             #17A34C;
+$brown:             #AA7243;
+
+// ── Legacy aliases (backward-compatible with existing base.scss) ──
+$dark-grey:         $dgem-dark-blue;
+$dark-blue:         $dgem-blue;
+$turquois:          $dgem-turquoise;
+$light-blue:        $dgem-light-blue;
+$text-grey-light:   $silver;
+
+// ── Theme tokens ──
+$color-primary:     $dgem-blue;
+$color-secondary:   $dgem-turquoise;
+$color-accent:      $dgem-light-blue;
+$color-foreground:  $dgem-dark-blue;
+$color-background:  $white;
+$color-muted:       $bg-grey;
+$color-border:      $border-light-grey;
+$color-ring:        $dgem-blue;
+$color-error:       $red;
+$color-warning:     $yellow;
+$color-success:     $green;
+$color-info:        $dgem-light-blue;
+
+// ── Typography ──
+$font-family-sans:  "Ubuntu", "Helvetica Neue", Arial, sans-serif;
+$font-family-mono:  "Ubuntu Mono", "Fira Code", "Consolas", monospace;
+
+$font-weight-light:   300;
+$font-weight-regular: 400;
+$font-weight-medium:  500;
+$font-weight-bold:    700;
+
+$font-size-xs:  0.75rem;   // 12px
+$font-size-sm:  0.875rem;  // 14px
+$font-size-base: 1rem;     // 16px
+$font-size-lg:  1.125rem;  // 18px
+$font-size-xl:  1.25rem;   // 20px
+$font-size-2xl: 1.5rem;    // 24px
+$font-size-3xl: 1.75rem;   // 28px
+
+// ── Spacing (mirrors Tailwind 4px base) ──
+$space-1: 0.25rem;  // 4px
+$space-2: 0.5rem;   // 8px
+$space-3: 0.75rem;  // 12px
+$space-4: 1rem;     // 16px
+$space-5: 1.25rem;  // 20px
+$space-6: 1.5rem;   // 24px
+$space-8: 2rem;     // 32px
+$space-10: 2.5rem;  // 40px
+$space-12: 3rem;    // 48px
+$space-16: 4rem;    // 64px
+
+// ── Border Radius ──
+$radius-none: 0;
+$radius-sm:   0.125rem;
+$radius-md:   0.25rem;
+$radius-lg:   0.5rem;
+$radius-xl:   1rem;
+$radius-2xl:  1.5rem;
+$radius-full: 9999px;
+
+// ── Box Shadows ──
+$shadow-sm:  0 1px 2px rgba(0, 0, 0, 0.05);
+$shadow-md:  0 4px 6px -1px rgba(0, 0, 0, 0.1);
+$shadow-lg:  0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+// ── Transitions ──
+$transition-fast:    150ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-normal:  200ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-slow:    300ms cubic-bezier(0.4, 0, 0.2, 1);

@@ -1,0 +1,134 @@
+/*
+ * DGEM 2.0 Design System – Typography
+ *
+ * Typography classes extracted from Figma DGEM Design System.
+ * Font: Ubuntu (Light 300, Regular 400, Medium 500, Bold 700)
+ *
+ * Usage: @import "@dgem/design-system/typography";
+ */
+
+/* ─────────────────────────────────────────────
+   Base Typography
+   ───────────────────────────────────────────── */
+body {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--color-foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─────────────────────────────────────────────
+   Display
+   ───────────────────────────────────────────── */
+.text-display {
+  font-size: 1.75rem;       /* 28px */
+  line-height: 1.2;
+  letter-spacing: 0.03em;
+}
+.text-display-light   { font-weight: 300; }
+.text-display-regular { font-weight: 400; }
+.text-display-medium  { font-weight: 500; }
+
+/* ─────────────────────────────────────────────
+   Heading 1
+   ───────────────────────────────────────────── */
+.text-h1 {
+  font-size: 1.5rem;        /* 24px */
+  line-height: 1.2;
+}
+.text-h1-light   { font-weight: 300; letter-spacing: 0.03em; }
+.text-h1-regular { font-weight: 400; letter-spacing: 0.03em; }
+.text-h1-medium  { font-weight: 500; letter-spacing: 0.01em; }
+
+/* ─────────────────────────────────────────────
+   Heading 2
+   ───────────────────────────────────────────── */
+.text-h2 {
+  font-size: 1.25rem;       /* 20px */
+  line-height: 1.3;
+}
+.text-h2-light   { font-weight: 300; letter-spacing: 0.03em; }
+.text-h2-regular { font-weight: 400; letter-spacing: 0.01em; }
+.text-h2-medium  { font-weight: 500; letter-spacing: 0.03em; }
+
+/* ─────────────────────────────────────────────
+   Heading 3
+   ───────────────────────────────────────────── */
+.text-h3 {
+  font-size: 1rem;           /* 16px */
+  line-height: 1.2;
+}
+.text-h3-light   { font-weight: 300; letter-spacing: 0.03em; }
+.text-h3-regular { font-weight: 400; letter-spacing: 0.03em; }
+.text-h3-medium  { font-weight: 500; letter-spacing: 0.01em; }
+
+/* ─────────────────────────────────────────────
+   Heading 4
+   ───────────────────────────────────────────── */
+.text-h4 {
+  font-size: 0.875rem;      /* 14px */
+  line-height: 1.3;
+}
+.text-h4-light   { font-weight: 300; letter-spacing: 0.03em; }
+.text-h4-regular { font-weight: 400; letter-spacing: 0.01em; }
+.text-h4-medium  { font-weight: 500; letter-spacing: 0.003em; }
+
+/* ─────────────────────────────────────────────
+   Heading 5 (Link context)
+   ───────────────────────────────────────────── */
+.text-h5 {
+  font-size: 1.5rem;        /* 24px */
+  line-height: 1.4;
+  font-weight: 300;
+  letter-spacing: 0.03em;
+}
+
+/* ─────────────────────────────────────────────
+   Toolbar Title
+   ───────────────────────────────────────────── */
+.text-toolbar-title {
+  font-size: 1.125rem;      /* 18px */
+}
+.text-toolbar-title-light   { font-weight: 300; line-height: 1.4; letter-spacing: 0.03em; }
+.text-toolbar-title-regular { font-weight: 400; line-height: 1.3; letter-spacing: 0.01em; }
+.text-toolbar-title-medium  { font-weight: 500; line-height: 1.5; letter-spacing: 0.03em; }
+
+/* ─────────────────────────────────────────────
+   Body
+   ───────────────────────────────────────────── */
+.text-body {
+  font-size: 0.875rem;      /* 14px */
+  line-height: 1.6;
+}
+.text-body-light   { font-weight: 300; letter-spacing: 0.03em; }
+.text-body-regular { font-weight: 400; letter-spacing: 0.01em; }
+.text-body-medium  { font-weight: 500; letter-spacing: 0.03em; }
+
+/* Body 1 (16px variant from links section) */
+.text-body1 {
+  font-size: 1rem;           /* 16px */
+  line-height: 1.5;
+  font-weight: 300;
+  letter-spacing: 0.0125em;  /* 0.2px */
+}
+
+/* Body 2 (14px variant from links section) */
+.text-body2 {
+  font-size: 0.875rem;      /* 14px */
+  line-height: 1.5;
+  font-weight: 300;
+  letter-spacing: 0.021em;   /* 0.3px */
+}
+
+/* ─────────────────────────────────────────────
+   Small Text
+   ───────────────────────────────────────────── */
+.text-small {
+  font-size: 0.75rem;       /* 12px */
+  line-height: 1.4;
+}
+.text-small-light   { font-weight: 300; letter-spacing: 0.03em; }
+.text-small-regular { font-weight: 400; letter-spacing: 0.02em; }
+.text-small-medium  { font-weight: 500; letter-spacing: 0.03em; }

@@ -1,0 +1,188 @@
+/*
+ * DGEM Design System – Feedback (progress, toast)
+ *
+ * Partial of components.css. Do not import directly – import
+ * "@dgem/design-system/components" (the barrel) instead.
+ */
+
+@layer components {
+
+/* ═════════════════════════════════════════════
+   PROGRESS INDICATOR
+   Figma: Check, Number, Error, Warning,
+          Progressing, Empty, Disable
+   ═════════════════════════════════════════════ */
+.dgem-progress-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  height: 0.25rem;
+  background-color: var(--grey-200);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+.dgem-progress-bar-fill {
+  height: 100%;
+  background-color: var(--dgem-blue);
+  border-radius: 9999px;
+  transition: width var(--transition-slow);
+}
+
+.dgem-progress-step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  min-width: 2rem;
+  min-height: 2rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+.dgem-progress-step-complete  { background-color: var(--color-green); color: var(--dgem-white); }
+.dgem-progress-step-active    { background-color: var(--dgem-blue); color: var(--dgem-white); }
+.dgem-progress-step-error     { background-color: var(--color-red); color: var(--dgem-white); }
+.dgem-progress-step-warning   { background-color: var(--color-yellow); color: var(--dgem-dark-blue); }
+.dgem-progress-step-pending   { background-color: var(--grey-200); color: var(--grey-600); border: 1.5px solid #C4C4C4; }
+.dgem-progress-step-disabled  { background-color: var(--grey-100); color: var(--grey-300); }
+
+
+/* ═════════════════════════════════════════════
+   TOAST NOTIFICATIONS
+   ═════════════════════════════════════════════ */
+
+.dgem-toast {
+  position: fixed;
+  top: 5.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 24rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  z-index: 100000;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.05),
+    0 10px 15px -3px rgba(0, 0, 0, 0.06),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  animation: dgem-toast-in 300ms ease forwards;
+}
+
+/* – Icon ––––––––––––––––––––––––––––––––––––– */
+.dgem-toast-icon {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* – Text block ––––––––––––––––––––––––––––––– */
+.dgem-toast-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-top: 0.125rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.dgem-toast-title {
+  font-weight: 500;
+}
+
+.dgem-toast-description {
+  font-weight: 400;
+}
+
+/* – Dismiss button ––––––––––––––––––––––––––– */
+.dgem-toast-dismiss {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  opacity: 0.6;
+  transition: opacity 150ms ease;
+}
+
+.dgem-toast-dismiss:hover {
+  opacity: 1;
+}
+
+/* – Light mode (white background) –––––––––––– */
+.dgem-toast-light {
+  background-color: var(--dgem-white);
+}
+
+.dgem-toast-light .dgem-toast-icon {
+  color: #38B24C;
+}
+
+.dgem-toast-light .dgem-toast-title {
+  color: #171717;
+}
+
+.dgem-toast-light .dgem-toast-description {
+  color: #737373;
+}
+
+.dgem-toast-light .dgem-toast-dismiss {
+  color: #737373;
+}
+
+/* – Color mode: Success (green background) –– */
+.dgem-toast-green {
+  background-color: #38B24C;
+  color: var(--dgem-white);
+}
+
+.dgem-toast-green .dgem-toast-icon,
+.dgem-toast-green .dgem-toast-title,
+.dgem-toast-green .dgem-toast-description,
+.dgem-toast-green .dgem-toast-dismiss {
+  color: var(--dgem-white);
+}
+
+/* – Color mode: Warning (yellow background) – */
+.dgem-toast-yellow {
+  background-color: var(--color-yellow);
+  color: var(--dgem-dark-blue);
+}
+
+.dgem-toast-yellow .dgem-toast-icon,
+.dgem-toast-yellow .dgem-toast-title,
+.dgem-toast-yellow .dgem-toast-description,
+.dgem-toast-yellow .dgem-toast-dismiss {
+  color: var(--dgem-dark-blue);
+}
+
+/* – Color mode: Danger (red background) –––––– */
+.dgem-toast-red {
+  background-color: var(--color-red);
+  color: var(--dgem-white);
+}
+
+.dgem-toast-red .dgem-toast-icon,
+.dgem-toast-red .dgem-toast-title,
+.dgem-toast-red .dgem-toast-description,
+.dgem-toast-red .dgem-toast-dismiss {
+  color: var(--dgem-white);
+}
+
+/* – Animation –––––––––––––––––––––––––––––––– */
+@keyframes dgem-toast-in {
+  from { opacity: 0; transform: translateX(-50%) translateY(-1rem); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+}

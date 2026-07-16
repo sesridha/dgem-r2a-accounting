@@ -1,0 +1,47 @@
+{
+  "name": "@dgem/design-system",
+  "version": "1.0.4",
+  "description": "DGEM Design System – design tokens, typography, component styles, and Tailwind CSS preset",
+  "main": "src/index.css",
+  "exports": {
+    ".": "./src/index.css",
+    "./tailwind-config": "./tailwind.config.js",
+    "./tailwind-plugin": "./src/plugin.js",
+    "./tokens": "./src/css/tokens.css",
+    "./components": "./src/css/components.css",
+    "./typography": "./src/css/typography.css",
+    "./utilities": "./src/css/utilities.css",
+    "./scss/variables": "./src/scss/_variables.scss",
+    "./assets/*": "./src/assets/*"
+  },
+  "files": [
+    "src/",
+    "tailwind.config.js",
+    "postcss.config.js"
+  ],
+  "scripts": {
+    "build": "node scripts/build.js",
+    "build:watch": "node scripts/build.js --watch",
+    "lint": "stylelint 'src/**/*.css'"
+  },
+  "keywords": [
+    "dgem",
+    "design-system",
+    "tailwindcss",
+    "capgemini"
+  ],
+  "license": "UNLICENSED",
+  "private": true,
+  "devDependencies": {
+    "autoprefixer": "^10.4.0",
+    "cssnano": "^8.0.2",
+    "postcss": "^8.4.0",
+    "postcss-import": "^16.1.1",
+    "stylelint": "^17.14.0",
+    "stylelint-config-standard": "^40.0.0",
+    "tailwindcss": "^3.4.0"
+  },
+  "peerDependencies": {
+    "tailwindcss": ">=3.4.0"
+  }
+}

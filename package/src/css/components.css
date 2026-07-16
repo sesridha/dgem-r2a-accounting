@@ -1,0 +1,15 @@
+/*
+ * DGEM 2.0 Design System – Component Styles
+ *
+ * Pre-built component classes for buttons, links, inputs, cards,
+ * tags, modals, and navigation extracted from Figma.
+ *
+ * Usage: @import "@dgem/design-system/components";
+ */
+
+@import "./components/buttons.css";
+@import "./components/forms.css";
+@import "./components/data-display.css";
+@import "./components/feedback.css";
+@import "./components/navigation.css";
+@import "./components/modals.css";

@@ -1,0 +1,272 @@
+/*
+ * DGEM Design System – Buttons & Links
+ *
+ * Partial of components.css. Do not import directly – import
+ * "@dgem/design-system/components" (the barrel) instead.
+ */
+
+@layer components {
+
+/* ═════════════════════════════════════════════
+   BUTTONS
+   Figma: pill-shaped (border-radius: 48px)
+   Types: filled, outlined, text
+   Sizes: large (h-48), medium (h-40), small (h-24)
+   ═════════════════════════════════════════════ */
+
+/* ── Base ── */
+.dgem-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  font-family: var(--font-sans);
+  font-weight: 400;
+  white-space: nowrap;
+  cursor: pointer;
+  /* Animated fill requires: relative, z-index, overflow */
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  transition: color var(--transition-base),
+              border-color var(--transition-base),
+              box-shadow var(--transition-base);
+}
+/* Animated fill overlay – fades in on hover (DGEM signature button effect) */
+.dgem-btn::before {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: -1px;
+  height: calc(100% + 2px);
+  width: calc(100% + 2px);
+  border-radius: 9999px;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  z-index: -1;
+}
+.dgem-btn:focus-visible {
+  outline: 2px solid var(--color-ring);
+  outline-offset: 2px;
+}
+.dgem-btn:disabled,
+.dgem-btn[aria-disabled="true"] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ── Sizes ── */
+.dgem-btn-lg {
+  height: 3rem;             /* 48px */
+  padding: 0.5rem 1rem;
+  gap: 1rem;
+  font-size: 1rem;          /* 16px */
+  line-height: 1.125rem;
+}
+.dgem-btn-md {
+  height: 2.5rem;           /* 40px */
+  padding: 0.75rem 1rem;
+  gap: 1rem;
+  font-size: 1rem;           /* 16px */
+  line-height: 1.125rem;
+}
+.dgem-btn-sm {
+  height: 1.5rem;           /* 24px */
+  padding: 0.5rem;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1.125rem;
+}
+
+/* ── Filled ── */
+.dgem-btn-filled-dark {
+  background-color: var(--dgem-dark-blue);
+  border: 1px solid var(--dgem-dark-blue);
+  color: var(--dgem-white);
+}
+.dgem-btn-filled-dark::before { background: var(--dgem-blue); }
+.dgem-btn-filled-dark:hover { border-color: var(--dgem-blue); }
+.dgem-btn-filled-dark:hover::before { opacity: 1; }
+
+.dgem-btn-filled-blue {
+  background-color: var(--dgem-blue);
+  border: 1px solid var(--dgem-blue);
+  color: var(--dgem-white);
+}
+.dgem-btn-filled-blue::before { background: #004A91; }
+.dgem-btn-filled-blue:hover::before { opacity: 1; }
+
+.dgem-btn-filled-white {
+  background-color: var(--dgem-white);
+  border: 1px solid var(--dgem-white);
+  color: var(--dgem-dark-blue);
+}
+.dgem-btn-filled-white::before { background: rgba(0, 0, 0, 0.06); }
+.dgem-btn-filled-white:hover::before { opacity: 1; }
+
+/* ── Outlined ── */
+.dgem-btn-outlined-dark {
+  background-color: transparent;
+  border: 1px solid var(--dgem-dark-blue);
+  color: var(--dgem-dark-blue);
+}
+.dgem-btn-outlined-dark::before { background: var(--dgem-dark-blue); }
+.dgem-btn-outlined-dark:hover { color: var(--dgem-white); }
+.dgem-btn-outlined-dark:hover::before { opacity: 1; }
+
+.dgem-btn-outlined-blue {
+  background-color: transparent;
+  border: 1px solid var(--dgem-blue);
+  color: var(--dgem-blue);
+}
+.dgem-btn-outlined-blue::before { background: var(--dgem-blue); }
+.dgem-btn-outlined-blue:hover { color: var(--dgem-white); }
+.dgem-btn-outlined-blue:hover::before { opacity: 1; }
+
+.dgem-btn-outlined-white {
+  background-color: transparent;
+  border: 1px solid var(--dgem-white);
+  color: var(--dgem-white);
+}
+.dgem-btn-outlined-white::before { background: rgba(255, 255, 255, 0.15); }
+.dgem-btn-outlined-white:hover::before { opacity: 1; }
+
+/* ── Text (link-style button) ── */
+.dgem-btn-text-dark {
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: var(--dgem-dark-blue);
+}
+.dgem-btn-text-dark::before { background: rgba(18, 26, 56, 0.06); }
+.dgem-btn-text-dark:hover::before { opacity: 1; }
+
+.dgem-btn-text-blue {
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: var(--dgem-blue);
+}
+.dgem-btn-text-blue::before { background: rgba(0, 88, 171, 0.06); }
+.dgem-btn-text-blue:hover::before { opacity: 1; }
+
+.dgem-btn-text-white {
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: var(--dgem-white);
+}
+.dgem-btn-text-white::before { background: rgba(255, 255, 255, 0.12); }
+.dgem-btn-text-white:hover::before { opacity: 1; }
+
+
+/* ── BEM-style aliases (preferred class names in modern DGEM code) ──
+   These match the naming used in front-toolset and new applications. */
+
+/* Outlined: dark border → dark fill on hover (most common interactive button) */
+.dgem-btn--outlined {
+  background-color: transparent;
+  border: 1px solid var(--dgem-dark-blue);
+  color: var(--dgem-dark-blue);
+}
+.dgem-btn--outlined::before { background: var(--dgem-dark-blue); }
+.dgem-btn--outlined:hover { color: var(--dgem-white); }
+.dgem-btn--outlined:hover::before { opacity: 1; }
+
+/* Filled: dark background → animates to blue on hover */
+.dgem-btn--filled {
+  background-color: var(--dgem-dark-blue);
+  border: 1px solid var(--dgem-dark-blue);
+  color: var(--dgem-white);
+}
+.dgem-btn--filled::before { background: var(--dgem-blue); }
+.dgem-btn--filled:hover { border-color: var(--dgem-blue); }
+.dgem-btn--filled:hover::before { opacity: 1; }
+
+/* Ghost: transparent, barely-there fill on hover */
+.dgem-btn--ghost {
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: var(--dgem-dark-blue);
+}
+.dgem-btn--ghost::before { background: rgba(18, 26, 56, 0.06); }
+.dgem-btn--ghost:hover::before { opacity: 1; }
+
+/* Destructive */
+.dgem-btn--destructive {
+  background-color: var(--color-red);
+  border: 1px solid var(--color-red);
+  color: var(--dgem-white);
+}
+.dgem-btn--destructive::before { background: #C0001C; }
+.dgem-btn--destructive:hover::before { opacity: 1; }
+
+/* Icon-only: force a perfect circle (equal width + height, no padding) */
+.dgem-btn--icon {
+  width: 2.5rem !important;            /* 40px – matches md height */
+  min-width: 2.5rem !important;
+  height: 2.5rem !important;
+  min-height: 2.5rem !important;
+  padding: 0 !important;
+  border-radius: 9999px !important;
+  aspect-ratio: 1;
+  flex-shrink: 0;
+}
+.dgem-btn--icon.dgem-btn-lg {
+  width: 3rem !important;              /* 48px */
+  min-width: 3rem !important;
+  height: 3rem !important;
+  min-height: 3rem !important;
+}
+.dgem-btn--icon.dgem-btn-sm {
+  width: 2rem !important;              /* 32px */
+  min-width: 2rem !important;
+  height: 2rem !important;
+  min-height: 2rem !important;
+}
+
+
+/* ═════════════════════════════════════════════
+   LINKS
+   Figma: underline on default, bolder on hover
+   Variants: light bg, dark bg × body1/body2/h5
+   ═════════════════════════════════════════════ */
+.dgem-link {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  text-decoration: none;
+  cursor: pointer;
+  padding-bottom: 2px;
+  transition: color var(--transition-base);
+}
+.dgem-link:hover {
+  animation: text-underline2 0.54s 1 forwards;
+}
+
+.dgem-link-light {
+  color: var(--dgem-dark-blue);
+  background: linear-gradient(to right, var(--dgem-dark-blue) 0%, var(--dgem-dark-blue) 100%)
+              no-repeat 0 100% / 0 1px;
+}
+.dgem-link-light:hover {
+  color: var(--dgem-blue);
+}
+
+.dgem-link-dark {
+  color: var(--dgem-white);
+  background: linear-gradient(to right, var(--dgem-white) 0%, var(--dgem-white) 100%)
+              no-repeat 0 100% / 0 1px;
+}
+.dgem-link-dark:hover {
+  color: var(--dgem-turquoise);
+}
+
+.dgem-link-h5     { font-size: 1.5rem; line-height: 1.4; letter-spacing: 0.02em; }
+.dgem-link-body1  { font-size: 1rem; line-height: 1.5; letter-spacing: 0.0125em; }
+.dgem-link-body2  { font-size: 0.875rem; line-height: 1.5; letter-spacing: 0.021em; }
+.dgem-link-body3  { font-size: 0.75rem; line-height: 1.5; letter-spacing: 0.02em; }
+
+.dgem-link-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+}

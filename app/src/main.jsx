@@ -1,8 +1,6 @@
-import "@dgem/design-system";
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import "./index.css";
-import App from "./App.jsx";
+// Legacy Vite template file – superseded by main.tsx.
+// Not used by the app (index.html entry point is /src/main.tsx).
+// Safe to delete.
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

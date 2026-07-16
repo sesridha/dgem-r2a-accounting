@@ -7,7 +7,8 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
+      // import.meta.dirname is the ESM-native equivalent of __dirname (Node 21.2+)
+      '@': path.resolve(import.meta.dirname, './src'),
     },
   },
   build: {

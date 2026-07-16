@@ -11,6 +11,12 @@ export default defineConfig({
       '@': path.resolve(import.meta.dirname, './src'),
     },
   },
+  // Prevent Vite from pre-bundling tailwindcss — it's a build tool (devDependency),
+  // not application code. Without this, adding any package that depends on tailwindcss
+  // at runtime would trigger a CJS parse error.
+  optimizeDeps: {
+    exclude: ['tailwindcss'],
+  },
   build: {
     chunkSizeWarningLimit: 600,
     rollupOptions: {

@@ -4,13 +4,6 @@
  * Registers DGEM typography and component utilities as
  * Tailwind plugin so they work with the `@apply` directive.
  *
- * Also injects universal base resets so consuming apps
- * need nothing in their own index.css beyond:
- *   @tailwind base;
- *   @tailwind components;
- *   @tailwind utilities;
- *   @import "@dgem/design-system";
- *
  * Usage in tailwind.config.js:
  *   const dgemPlugin = require("@dgem/design-system/tailwind-plugin");
  *   module.exports = { plugins: [dgemPlugin] };
@@ -18,29 +11,12 @@
 const plugin = require("tailwindcss/plugin");
 
 module.exports = plugin(function ({ addBase, addComponents, theme }) {
-  /* ── Universal Base Resets ──
-     Applied in @layer base so Tailwind utilities can still override. */
+  /* ── Base reset ── */
   addBase({
-    "*, *::before, *::after": {
-      boxSizing: "border-box",
-    },
-    "html, body": {
-      height: "100%",
-      margin: "0",
-      padding: "0",
-    },
     body: {
       fontFamily: theme("fontFamily.sans"),
-      fontSize: "0.875rem",   /* 14px – DGEM body default */
-      fontWeight: "400",
       color: "var(--color-foreground)",
       backgroundColor: "var(--color-background)",
-      WebkitFontSmoothing: "antialiased",
-      MozOsxFontSmoothing: "grayscale",
-    },
-    /* React root — full viewport height */
-    "#root": {
-      height: "100%",
     },
   });
 

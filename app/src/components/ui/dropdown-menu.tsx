@@ -63,7 +63,7 @@ function DropdownMenuContent({ className, align = "start", sideOffset = 4, child
       onMouseDown={(e) => e.stopPropagation()}
       className={cn(
         "fixed z-50 min-w-[8rem] overflow-hidden rounded-lg p-1",
-        "bg-[var(--color-background)] text-[var(--color-foreground)] shadow-md",
+        "bg-white text-[var(--color-foreground)] shadow-md",
         "animate-in fade-in-0 zoom-in-95",
         className
       )}
@@ -88,8 +88,8 @@ function DropdownMenuItem({ className, inset, variant = "default", children, onC
       onClick={(e) => { setOpen(false); onClick?.(e) }}
       className={cn(
         "relative flex cursor-pointer select-none items-center gap-1.5 rounded-md px-1.5 py-1 text-sm outline-none",
-        "hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)]",
-        variant === "destructive" && "text-[var(--color-destructive)] hover:bg-[var(--color-destructive)]/10",
+        "hover:bg-grey-100 hover:text-[var(--color-foreground)]",
+        variant === "destructive" && "text-red hover:bg-red/10",
         inset && "pl-7",
         className
       )}
@@ -109,7 +109,7 @@ function DropdownMenuCheckboxItem({ className, children, checked, inset, onCheck
       onClick={(e) => { onCheckedChange?.(!checked); setOpen(false) }}
       className={cn(
         "relative flex cursor-pointer select-none items-center gap-1.5 rounded-md py-1 pl-1.5 pr-8 text-sm outline-none",
-        "hover:bg-[var(--color-muted)]",
+        "hover:bg-grey-100",
         inset && "pl-7",
         className
       )}
@@ -140,7 +140,7 @@ function DropdownMenuRadioItem({ className, children, value = "", inset, ...prop
       onClick={() => { onValueChange(value); setOpen(false) }}
       className={cn(
         "relative flex cursor-pointer select-none items-center gap-1.5 rounded-md py-1 pl-1.5 pr-8 text-sm outline-none",
-        "hover:bg-[var(--color-muted)]",
+        "hover:bg-grey-100",
         inset && "pl-7",
         className
       )}
@@ -157,18 +157,18 @@ function DropdownMenuRadioItem({ className, children, value = "", inset, ...prop
 function DropdownMenuLabel({ className, inset, ...props }: React.HTMLAttributes<HTMLDivElement> & { inset?: boolean }) {
   return (
     <div
-      className={cn("px-1.5 py-1 text-xs font-medium text-[var(--color-muted-foreground)]", inset && "pl-7", className)}
+      className={cn("px-1.5 py-1 text-xs font-medium text-grey-600", inset && "pl-7", className)}
       {...props}
     />
   )
 }
 
 function DropdownMenuSeparator({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("-mx-1 my-1 h-px bg-[var(--color-border)]", className)} {...props} />
+  return <div className={cn("-mx-1 my-1 h-px bg-grey-200", className)} {...props} />
 }
 
 function DropdownMenuShortcut({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) {
-  return <span className={cn("ml-auto text-xs tracking-widest text-[var(--color-muted-foreground)]", className)} {...props} />
+  return <span className={cn("ml-auto text-xs tracking-widest text-grey-600", className)} {...props} />
 }
 
 function DropdownMenuSub({ children }: { children?: React.ReactNode }) {
@@ -182,7 +182,7 @@ function DropdownMenuSubTrigger({ className, inset, children, ...props }: React.
       aria-haspopup="menu"
       className={cn(
         "flex cursor-pointer select-none items-center gap-1.5 rounded-md px-1.5 py-1 text-sm outline-none",
-        "hover:bg-[var(--color-muted)]",
+        "hover:bg-grey-100",
         inset && "pl-7",
         className
       )}
@@ -199,7 +199,7 @@ function DropdownMenuSubContent({ className, ...props }: React.HTMLAttributes<HT
     <div
       className={cn(
         "z-50 min-w-[8rem] overflow-hidden rounded-lg p-1",
-        "bg-[var(--color-background)] text-[var(--color-foreground)] shadow-md",
+        "bg-white text-[var(--color-foreground)] shadow-md",
         "animate-in fade-in-0",
         className
       )}

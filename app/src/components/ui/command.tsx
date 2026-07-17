@@ -22,7 +22,7 @@ const Command = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEle
       <CommandCtx.Provider value={{ filter, setFilter }}>
         <div
           ref={ref}
-          className={cn("flex h-full w-full flex-col overflow-hidden rounded-md bg-[var(--color-background)] text-[var(--color-foreground)]", className)}
+          className={cn("flex h-full w-full flex-col overflow-hidden rounded-md bg-white text-[#121A38]", className)}
           {...props}
         >
           {children}
@@ -62,7 +62,7 @@ const CommandInput = React.forwardRef<HTMLInputElement, React.InputHTMLAttribute
           onChange={(e) => { setFilter(e.target.value); onChange?.(e) }}
           className={cn(
             "flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none",
-            "placeholder:text-[var(--color-muted-foreground)] disabled:cursor-not-allowed disabled:opacity-50",
+            "placeholder:text-grey-600 disabled:cursor-not-allowed disabled:opacity-50",
             className
           )}
           {...props}
@@ -84,7 +84,7 @@ CommandList.displayName = "CommandList"
 /* ── CommandEmpty ── */
 const CommandEmpty = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   (props, ref) => (
-    <div ref={ref} className="py-6 text-center text-sm text-[var(--color-muted-foreground)]" {...props} />
+    <div ref={ref} className="py-6 text-center text-sm text-grey-600" {...props} />
   )
 )
 CommandEmpty.displayName = "CommandEmpty"
@@ -94,7 +94,7 @@ const CommandGroup = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLD
   ({ className, heading, children, ...props }, ref) => (
     <div ref={ref} className={cn("overflow-hidden p-1", className)} {...props}>
       {heading && (
-        <div className="px-2 py-1.5 text-xs font-medium text-[var(--color-muted-foreground)]">{heading}</div>
+        <div className="px-2 py-1.5 text-xs font-medium text-grey-600">{heading}</div>
       )}
       {children}
     </div>
@@ -105,7 +105,7 @@ CommandGroup.displayName = "CommandGroup"
 /* ── CommandSeparator ── */
 const CommandSeparator = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn("-mx-1 h-px bg-[var(--color-border)]", className)} {...props} />
+    <div ref={ref} className={cn("-mx-1 h-px bg-grey-200", className)} {...props} />
   )
 )
 CommandSeparator.displayName = "CommandSeparator"
@@ -127,7 +127,7 @@ const CommandItem = React.forwardRef<HTMLDivElement, CommandItemProps>(
       }}
       className={cn(
         "relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none",
-        "hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)]",
+        "hover:bg-grey-100 hover:text-[#121A38]",
         disabled && "pointer-events-none opacity-50",
         className
       )}
@@ -143,7 +143,7 @@ CommandItem.displayName = "CommandItem"
 function CommandShortcut({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) {
   return (
     <span
-      className={cn("ml-auto flex items-center gap-1 text-xs tracking-widest text-[var(--color-muted-foreground)]", className)}
+      className={cn("ml-auto flex items-center gap-1 text-xs tracking-widest text-grey-600", className)}
       {...props}
     />
   )

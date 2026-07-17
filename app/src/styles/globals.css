@@ -8,12 +8,47 @@
  */
 @import "@dgem/design-system";
 
-/* ── Base resets ── */
+/* ── Explicit variable fallbacks (ensures vars are defined even if import resolves late) ── */
 @layer base {
+  :root {
+    --color-background:        #FFFFFF;
+    --color-foreground:        #121A38;
+    --color-card:              #FAFAFA;
+    --color-card-foreground:   #121A38;
+    --color-border:            #E5E5E5;
+    --color-muted:             #F4F4F5;
+    --color-muted-foreground:  #71717A;
+    --color-primary:           #0058AB;
+    --color-primary-foreground:#FFFFFF;
+    --color-destructive:       #E30021;
+    --color-ring:              #0058AB;
+    --font-sans:               "Ubuntu", system-ui, sans-serif;
+
+    /* Sidebar tokens (used by dgem-sidebar and related classes) */
+    --sidebar-bg:              #FAFAFA;
+    --sidebar-fg:              #121A38;
+    --sidebar-border:          #E5E5E5;
+    --sidebar-active-bg:       #F4F4F5;
+    --sidebar-active-fg:       #0058AB;
+  }
+
+  .dark {
+    --color-background:        #1a1a2e;
+    --color-foreground:        #F4F4F5;
+    --color-card:              #16213e;
+    --color-border:            rgba(255,255,255,0.1);
+    --color-muted:             #0f3460;
+    --color-muted-foreground:  #A8A8A8;
+    --sidebar-bg:              #16213e;
+    --sidebar-fg:              #F4F4F5;
+    --sidebar-border:          rgba(255,255,255,0.1);
+  }
+
   * {
     border-color: var(--color-border);
     box-sizing: border-box;
   }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);

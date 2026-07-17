@@ -61,14 +61,14 @@ function SheetClose({ children, className, ...props }: React.ButtonHTMLAttribute
 
 /* ── Sheet variants (side) ── */
 const sheetVariants = cva(
-  "fixed z-50 bg-[var(--color-background)] p-6 shadow-lg transition-transform ease-in-out duration-300",
+  "fixed z-50 bg-white p-6 shadow-lg transition-transform ease-in-out duration-300",
   {
     variants: {
       side: {
-        top: "inset-x-0 top-0 border-b border-[var(--color-border)]",
-        bottom: "inset-x-0 bottom-0 border-t border-[var(--color-border)]",
-        left: "inset-y-0 left-0 h-full w-3/4 border-r border-[var(--color-border)] sm:max-w-sm",
-        right: "inset-y-0 right-0 h-full w-3/4 border-l border-[var(--color-border)] sm:max-w-sm",
+        top: "inset-x-0 top-0 border-b border-grey-200",
+        bottom: "inset-x-0 bottom-0 border-t border-grey-200",
+        left: "inset-y-0 left-0 h-full w-3/4 border-r border-grey-200 sm:max-w-sm",
+        right: "inset-y-0 right-0 h-full w-3/4 border-l border-grey-200 sm:max-w-sm",
       },
     },
     defaultVariants: { side: "right" },
@@ -111,14 +111,14 @@ SheetFooter.displayName = "SheetFooter"
 
 const SheetTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(
   ({ className, ...props }, ref) => (
-    <h2 ref={ref} className={cn("text-lg font-semibold text-[var(--color-foreground)]", className)} {...props} />
+    <h2 ref={ref} className={cn("text-lg font-semibold text-[#121A38]", className)} {...props} />
   )
 )
 SheetTitle.displayName = "SheetTitle"
 
 const SheetDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
   ({ className, ...props }, ref) => (
-    <p ref={ref} className={cn("text-sm text-[var(--color-muted-foreground)]", className)} {...props} />
+    <p ref={ref} className={cn("text-sm text-grey-600", className)} {...props} />
   )
 )
 SheetDescription.displayName = "SheetDescription"

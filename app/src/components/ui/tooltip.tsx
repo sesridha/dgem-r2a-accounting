@@ -44,7 +44,7 @@ const TooltipContent = React.forwardRef<HTMLDivElement, TooltipContentProps>(
           "left-1/2 -translate-x-1/2",
           sideClass,
           "whitespace-nowrap rounded px-2 py-1 text-xs",
-          "bg-[var(--dgem-dark-blue)] text-white",
+          "bg-[#121A38] text-white",
           className
         )}
         {...props}

@@ -109,7 +109,7 @@ const SelectContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTML
         onMouseDown={(e) => e.stopPropagation()}
         className={cn(
           "fixed z-50 min-w-[8rem] overflow-hidden rounded-md border",
-          "bg-[var(--color-background)] text-[var(--color-foreground)] shadow-md",
+          "bg-white text-[#121A38] shadow-md",
           "animate-in fade-in-0 zoom-in-95",
           className
         )}
@@ -150,8 +150,8 @@ const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
         onClick={() => !disabled && onValueChange(value)}
         className={cn(
           "relative flex w-full cursor-pointer select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none",
-          "hover:bg-[var(--color-muted)] hover:text-[var(--color-foreground)]",
-          isSelected && "bg-[var(--color-muted)] font-medium",
+          "hover:bg-grey-100 hover:text-[#121A38]",
+          isSelected && "bg-grey-100 font-medium",
           disabled && "pointer-events-none opacity-50",
           className
         )}
@@ -172,7 +172,7 @@ SelectItem.displayName = "SelectItem"
 /* ── Separator ── */
 const SelectSeparator = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn("-mx-1 my-1 h-px bg-[var(--color-muted)]", className)} {...props} />
+    <div ref={ref} className={cn("-mx-1 my-1 h-px bg-grey-100", className)} {...props} />
   )
 )
 SelectSeparator.displayName = "SelectSeparator"

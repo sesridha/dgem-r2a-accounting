@@ -88,7 +88,7 @@ const PopoverContent = React.forwardRef<HTMLDivElement, PopoverContentProps>(
         onMouseDown={(e) => e.stopPropagation()}
         className={cn(
           "fixed z-50 min-w-[18rem] rounded-md border",
-          "bg-[var(--color-background)] text-[var(--color-foreground)] p-4 shadow-md outline-none",
+          "bg-white text-[#121A38] p-4 shadow-md outline-none",
           "animate-in fade-in-0 zoom-in-95",
           className
         )}

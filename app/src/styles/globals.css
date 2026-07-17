@@ -3,54 +3,36 @@
 @tailwind utilities;
 
 /*
- * DGEM Design System — tokens, typography, components, utilities.
- * Defines all brand primitives: --dgem-*, --grey-*, --color-*, --font-*.
+ * DGEM Design System — all brand tokens, typography, components, utilities.
+ * Source of truth: package/src/css/tokens.css
  */
 @import "@dgem/design-system";
 
-/* ── App-level token overrides ───────────────────────────────────────────────
- * Placed AFTER @import (non-layered) so these win the cascade over the
- * design-system :root. No raw hex values — only var(--token) references.
- * ─────────────────────────────────────────────────────────────────────────── */
+/*
+ * App-specific tokens only — nothing that already exists in tokens.css.
+ *   --radius      : no radius scale in the package
+ *   --sidebar-*   : sidebar tokens not shipped by the package
+ *                   (reference package semantic tokens so dark-mode is automatic)
+ */
 :root {
-  /* Border radius (dimension, not a color token) */
-  --radius: 4px;
-
-  /* Override default grey-200 border → DGEM Light Blue */
-  --color-border: var(--dgem-light-blue);
-  --color-ring:   var(--dgem-light-blue);
-
-  /* Sidebar tokens (app-specific, not shipped by the design system) */
+  --radius:            4px;
   --sidebar-bg:        var(--color-card);
   --sidebar-fg:        var(--color-foreground);
-  --sidebar-border:    var(--dgem-light-blue);
+  --sidebar-border:    var(--color-border);
   --sidebar-active-bg: var(--color-muted);
   --sidebar-active-fg: var(--color-primary);
 }
 
-/* Dark-mode: keep DGEM Light Blue border + re-map sidebar to dark semantic tokens */
-.dark,
-[data-theme="dark"] {
-  --color-border:      var(--dgem-light-blue);
-  --color-ring:        var(--dgem-light-blue);
-  --sidebar-bg:        var(--color-card);
-  --sidebar-fg:        var(--color-foreground);
-  --sidebar-border:    var(--dgem-light-blue);
-  --sidebar-active-bg: var(--color-muted);
-  --sidebar-active-fg: var(--color-primary);
-}
-
-/* ── Universal base resets ── */
 @layer base {
   * {
-    border-color: var(--color-border);
-    box-sizing: border-box;
+    border-color:  var(--color-border);
+    box-sizing:    border-box;
     border-radius: var(--radius);
   }
   body {
     background-color: var(--color-background);
-    color: var(--color-foreground);
-    font-family: var(--font-sans);
-    margin: 0;
+    color:            var(--color-foreground);
+    font-family:      var(--font-sans);
+    margin:           0;
   }
 }

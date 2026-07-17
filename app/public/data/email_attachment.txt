@@ -1,0 +1,32 @@
+From: Jane Smith <jane.smith@acmecorp.com>
+To: finance-je@acmecorp.com
+Subject: JE - June Accruals - Marketing Dept
+Date: Fri, 30 Jun 2025 17:05:00 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+
+Hi team,
+
+Please post the attached accrual entry for June 2025:
+
+Journal Type : Accrual_Details
+Reference    : ACM-JUN-2025-041
+Period       : 06
+Company Code : 1000
+Currency     : USD
+
+---
+
+Points to Consider:
+
+Only company code 1000 is allowed for Accrual Journals.
+All Accrual Journals must use document type SA unless overridden.
+Calculate the monthly journal amount by dividing the total annual invoice amount by 12.
+Accrual input details are provided monthly by Marketing Department via email.
+Validate that company code, period, document type, cost center, and GL account are present and correct before posting.
+Accrual Journal must not contain GL account series 1000 or 3000.
+If any line is missing a cost center on an expense GL account (6100 series), reject the entire entry.
+Total debits must equal total credits for each reference - reject if imbalanced.
+
+Thanks,
+Jane

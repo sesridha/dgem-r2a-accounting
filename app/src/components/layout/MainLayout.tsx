@@ -1,24 +1,27 @@
-import { Outlet } from 'react-router-dom'
-import Sidebar from './Sidebar'
+import { Outlet } from "react-router-dom";
+import SidebarNav from "./Sidebar";
+import { SidebarProvider } from "../ui/sidebar";
 
 /**
- * Main Layout – wraps all protected pages.
- * Sidebar (fixed, 240 px) + scrollable content area.
+ * Main Layout Component
+ * Wraps all pages with sidebar and top navigation
  */
 export default function MainLayout() {
   return (
-    <div className="flex h-screen overflow-hidden" style={{ backgroundColor: 'var(--color-background)' }}>
-      {/* Sidebar */}
-      <aside className="dgem-sidebar" style={{ width: '240px', flexShrink: 0 }}>
-        <Sidebar />
-      </aside>
-
-      {/* Main content */}
-      <div className="flex flex-col flex-1 overflow-hidden">
-        <main className="flex-1 overflow-auto">
-          <Outlet />
-        </main>
-      </div>
+    <div className="flex h-screen overflow-hidden bg-background">
+      {/* Sidebar Navigation */}
+      <SidebarProvider>
+        <SidebarNav />
+        {/* Main Content Area */}
+        <div className="flex flex-col flex-1 overflow-hidden">
+          {/* Page Content */}
+          <main className="flex-1 overflow-auto">
+            <div className="h-full">
+              <Outlet />
+            </div>
+          </main>
+        </div>
+      </SidebarProvider>
     </div>
-  )
+  );
 }

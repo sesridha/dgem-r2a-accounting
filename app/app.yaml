@@ -1,0 +1,4 @@
+command:
+  - sh
+  - -c
+  - 'npm run build && pip install fastapi uvicorn databricks-sql-connector httpx && python app.py'

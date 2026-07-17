@@ -15,10 +15,10 @@
  *                 (reference semantic tokens so dark-mode is automatic)
  */
 :root {
-  --radius:            4px;
-  --sidebar-bg:        var(--color-card);
-  --sidebar-fg:        var(--color-foreground);
-  --sidebar-border:    var(--color-border);
+  --radius: 4px;
+  --sidebar-bg: var(--color-card);
+  --sidebar-fg: var(--color-foreground);
+  --sidebar-border: var(--color-border);
   --sidebar-active-bg: var(--color-muted);
   --sidebar-active-fg: var(--color-primary);
 }
@@ -27,16 +27,59 @@
   /* Exclude .gradient-bg — it is a fixed cosmetic overlay;
      border-radius clips it before blur and distorts the effect. */
   *:not(.gradient-bg) {
-    border-color:  var(--color-border);
-    box-sizing:    border-box;
+    border-color: var(--color-border);
+    box-sizing: border-box;
     border-radius: var(--radius);
+    /* position: fixed;
+    top: -200px;
+    right: -200px;
+    bottom: -200px;
+    left: -200px;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(
+        ellipse at center,
+        rgba(255, 255, 255, 0.9) 0%,
+        rgba(255, 255, 255, 0.6) 30%,
+        transparent 70%
+      ),
+      linear-gradient(
+        90deg,
+        #ff2f4b1f,
+        #ffb24a1f 11%,
+        #00e6e31f 41.5%,
+        #01b0f51f 69.5%,
+        #e557ad1f 93%,
+        #ff2f4b1f
+      );
+    filter: blur(100px); */
+  }
+  .gradient-bg {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+    width: 100%;
+    height: 132px;
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 47, 75, 0.3) 0%,
+      rgba(255, 178, 74, 0.3) 11%,
+      rgba(0, 230, 227, 0.3) 41.5%,
+      rgba(1, 176, 245, 0.3) 69.5%,
+      rgba(229, 87, 173, 0.3) 93%,
+      rgba(255, 47, 75, 0.3) 100%
+    );
+    filter: blur(134px);
   }
   body {
     /* background-color intentionally omitted:
        index.html sets class="dgem-page-bg" (#F3F4F5) and
        .gradient-bg (z-index:0) renders through transparent containers. */
-    color:       var(--color-foreground);
+    color: var(--color-foreground);
     font-family: var(--font-sans);
-    margin:      0;
+    margin: 0;
   }
 }

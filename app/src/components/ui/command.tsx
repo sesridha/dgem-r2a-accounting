@@ -22,7 +22,7 @@ const Command = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEle
       <CommandCtx.Provider value={{ filter, setFilter }}>
         <div
           ref={ref}
-          className={cn("flex h-full w-full flex-col overflow-hidden rounded-md bg-white text-[#121A38]", className)}
+          className={cn("flex w-full flex-col rounded-md bg-white text-[#121A38]", className)}
           {...props}
         >
           {children}

@@ -150,7 +150,7 @@ export default function SidebarNav() {
   return (
     <>
       <Sidebar>
-        <SidebarHeader className="border-b border-sidebar-border px-4 py-4">
+        <SidebarHeader className="border-b border-grey-200 px-4 py-4">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-md flex items-center justify-center shrink-0 bg-white">
               <img
@@ -163,7 +163,7 @@ export default function SidebarNav() {
               <h1 className="text-[15px] font-semibold leading-tight">
                 Capgemini
               </h1>
-              <p className="text-[10px] text-muted-foreground font-semibold tracking-[0.14em]">
+              <p className="text-[10px] text-[#71717A] font-semibold tracking-[0.14em]">
                 R2A AGENTIC AI
               </p>
             </div>
@@ -184,8 +184,8 @@ export default function SidebarNav() {
                       onClick={() => toggleMenu(item.label)}
                       className={cn(
                         "flex items-center w-full justify-start gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
-                        "hover:bg-sidebar-accent/70 hover:text-sidebar-accent-foreground",
-                        "text-sidebar-foreground/80",
+                        "hover:bg-grey-100 hover:text-[#121A38]",
+                        "text-[#121A38]",
                       )}
                     >
                       {item.icon}
@@ -198,7 +198,7 @@ export default function SidebarNav() {
                       />
                     </button>
                     {isExpanded && (
-                      <div className="ml-4 mt-1 space-y-1 border-l border-sidebar-border pl-3">
+                      <div className="ml-4 mt-1 space-y-1 border-l border-grey-200 pl-3">
                         {item.children!.map((child) => {
                           const hasSubChildren = !!(
                             child.children && child.children.length > 0
@@ -218,8 +218,8 @@ export default function SidebarNav() {
                                   onClick={() => toggleMenu(child.label)}
                                   className={cn(
                                     "flex items-center w-full justify-start gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
-                                    "hover:bg-sidebar-accent/70 hover:text-sidebar-accent-foreground",
-                                    "text-sidebar-foreground/70",
+                                    "hover:bg-grey-100 hover:text-[#121A38]",
+                                    "text-[#71717A]",
                                   )}
                                 >
                                   {child.icon}
@@ -234,7 +234,7 @@ export default function SidebarNav() {
                                   />
                                 </button>
                                 {isSubExpanded && (
-                                  <div className="ml-4 mt-1 space-y-0.5 border-l border-sidebar-border pl-3">
+                                  <div className="ml-4 mt-1 space-y-0.5 border-l border-grey-200 pl-3">
                                     {child.children!.map((subChild) => {
                                       const isSubChildActive =
                                         location.pathname === subChild.path ||
@@ -247,10 +247,10 @@ export default function SidebarNav() {
                                           to={subChild.path}
                                           className={cn(
                                             "flex items-center w-full justify-start gap-2 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors",
-                                            "hover:bg-sidebar-accent/70 hover:text-sidebar-accent-foreground",
+                                            "hover:bg-grey-100 hover:text-[#121A38]",
                                             isSubChildActive
-                                              ? "bg-(--sidebar-menu-active) text-(--white) shadow-sm"
-                                              : "text-sidebar-foreground/70",
+                                              ? "bg-[#0058AB] text-white shadow-sm"
+                                              : "text-[#71717A]",
                                           )}
                                         >
                                           {subChild.icon}
@@ -312,10 +312,10 @@ export default function SidebarNav() {
                               to={child.path}
                               className={cn(
                                 "flex items-center w-full justify-start gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
-                                "hover:bg-sidebar-accent/70 hover:text-sidebar-accent-foreground",
+                                "hover:bg-grey-100 hover:text-[#121A38]",
                                 isChildActive
-                                  ? "bg-(--sidebar-menu-active) text-(--white) shadow-sm"
-                                  : "text-sidebar-foreground/70",
+                                  ? "bg-[#0058AB] text-white shadow-sm"
+                                  : "text-[#71717A]",
                               )}
                             >
                               {child.icon}
@@ -336,10 +336,10 @@ export default function SidebarNav() {
                   className={({ isActive }) =>
                     cn(
                       "flex items-center w-full justify-start gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
-                      "hover:bg-sidebar-accent/70 hover:text-sidebar-accent-foreground",
+                      "hover:bg-grey-100 hover:text-[#121A38]",
                       isActive
-                        ? "bg-(--sidebar-menu-active) text-(--white) shadow-sm hover:bg-(--sidebar-menu-active)"
-                        : "text-sidebar-foreground/80",
+                        ? "bg-[#0058AB] text-white shadow-sm hover:bg-[#0058AB]"
+                        : "text-[#121A38]",
                     )
                   }
                 >
@@ -350,22 +350,22 @@ export default function SidebarNav() {
             })}
           </SidebarMenu>
         </SidebarContent>
-        <SidebarFooter className="border-t border-sidebar-border px-3 py-3">
+        <SidebarFooter className="border-t border-grey-200 px-3 py-3">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <div className="flex w-full items-center gap-3 rounded-lg p-2.5 hover:bg-sidebar-accent/70 cursor-pointer transition-colors">
+              <div className="flex w-full items-center gap-3 rounded-lg p-2.5 hover:bg-grey-100 cursor-pointer transition-colors">
                 <Avatar className="h-8 w-8">
                   <AvatarImage src="/avatar.png" />
                   <AvatarFallback>{initials}</AvatarFallback>
                 </Avatar>
                 <div className="flex flex-col text-left flex-1">
                   <span className="text-sm font-semibold">{displayName}</span>
-                  <span className="text-[11px] text-muted-foreground">
+                  <span className="text-[11px] text-[#71717A]">
                     {displayRole}
                   </span>
                 </div>
                 <div className="p-1.5 hover:bg-sidebar-accent rounded-md transition-colors">
-                  <Settings className="w-4 h-4 text-muted-foreground hover:text-foreground" />
+                  <Settings className="w-4 h-4 text-[#71717A] hover:text-foreground" />
                 </div>
               </div>
             </DropdownMenuTrigger>
@@ -373,7 +373,7 @@ export default function SidebarNav() {
               <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col">
                   <span className="text-sm font-medium">{displayName}</span>
-                  <span className="text-xs text-muted-foreground">
+                  <span className="text-xs text-[#71717A]">
                     {displayRole}
                   </span>
                 </div>

@@ -544,9 +544,9 @@ export function AutoCompleteInput<TOption extends AutoCompleteOption>({
         </div>
 
         {isOpen && (
-          <div className="relative animate-in fade-in-0 zoom-in-95 h-auto">
-            <CommandList>
-              <div className="absolute left-0 top-full mt-2 z-50 w-full">
+          <div className="relative h-0">
+            {/* Absolute panel – must be OUTSIDE CommandList to avoid overflow clipping */}
+            <div className="absolute left-0 top-0 mt-1 z-50 w-full">
                 <CommandGroup
                   className="relative z-50 min-w-32 rounded-md border border-grey-200 bg-white shadow-md overflow-y-auto"
                   style={{ maxHeight: maxListHeight }}
@@ -636,14 +636,15 @@ export function AutoCompleteInput<TOption extends AutoCompleteOption>({
                     })}
                   </>
 
-                  <CommandEmpty>
-                    <div className="py-3 text-center text-xs text-grey-600">
-                      No options
-                    </div>
-                  </CommandEmpty>
+                  {items.length === 0 && (
+                    <CommandEmpty>
+                      <div className="py-3 text-center text-xs text-grey-600">
+                        No options
+                      </div>
+                    </CommandEmpty>
+                  )}
                 </CommandGroup>
-              </div>
-            </CommandList>
+            </div>
           </div>
         )}
       </Command>

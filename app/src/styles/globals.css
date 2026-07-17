@@ -24,7 +24,9 @@
 }
 
 @layer base {
-  * {
+  /* Exclude .gradient-bg — it is a fixed cosmetic overlay;
+     border-radius clips it before blur and distorts the effect. */
+  *:not(.gradient-bg) {
     border-color:  var(--color-border);
     box-sizing:    border-box;
     border-radius: var(--radius);

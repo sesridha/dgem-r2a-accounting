@@ -10,9 +10,9 @@
 
 /*
  * App-specific tokens only — nothing that already exists in tokens.css.
- *   --radius      : no radius scale in the package
- *   --sidebar-*   : sidebar tokens not shipped by the package
- *                   (reference package semantic tokens so dark-mode is automatic)
+ *   --radius    : no radius scale in the package
+ *   --sidebar-* : sidebar tokens not shipped by the package
+ *                 (reference semantic tokens so dark-mode is automatic)
  */
 :root {
   --radius:            4px;
@@ -30,9 +30,11 @@
     border-radius: var(--radius);
   }
   body {
-    background-color: var(--color-background);
-    color:            var(--color-foreground);
-    font-family:      var(--font-sans);
-    margin:           0;
+    /* background-color intentionally omitted:
+       index.html sets class="dgem-page-bg" (#F3F4F5) and
+       .gradient-bg (z-index:0) renders through transparent containers. */
+    color:       var(--color-foreground);
+    font-family: var(--font-sans);
+    margin:      0;
   }
 }

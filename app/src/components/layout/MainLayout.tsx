@@ -8,7 +8,7 @@ import { SidebarProvider } from "../ui/sidebar";
  */
 export default function MainLayout() {
   return (
-    <div className="flex h-screen overflow-hidden bg-background">
+    <div className="flex h-screen overflow-hidden">
       {/* Sidebar Navigation */}
       <SidebarProvider>
         <SidebarNav />

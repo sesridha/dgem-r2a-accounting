@@ -3,6 +3,7 @@ const dgemPreset = require('../package/tailwind.config.js')
 
 module.exports = {
   presets: [dgemPreset],
+  darkMode: 'class',
   content: [
     './index.html',
     './src/**/*.{ts,tsx,js,jsx}',
@@ -10,5 +11,7 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('tailwindcss-animate'),
+  ],
 }

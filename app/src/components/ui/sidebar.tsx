@@ -1,8 +1,8 @@
-"use client";
-
+/**
+ * Pure-React Sidebar – no Radix UI dependency.
+ * Uses @dgem/design-system dgem-sidebar / dgem-sidebar-link classes.
+ */
 import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
-import { Slot } from "radix-ui";
 
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
@@ -374,7 +374,7 @@ function SidebarGroupLabel({
   asChild = false,
   ...props
 }: React.ComponentProps<"div"> & { asChild?: boolean }) {
-  const Comp = asChild ? Slot.Root : "div";
+  const Comp = "div";
 
   return (
     <Comp
@@ -394,7 +394,7 @@ function SidebarGroupAction({
   asChild = false,
   ...props
 }: React.ComponentProps<"button"> & { asChild?: boolean }) {
-  const Comp = asChild ? Slot.Root : "button";
+  const Comp = "button";
 
   return (
     <Comp
@@ -480,7 +480,7 @@ function SidebarMenuButton({
   isActive?: boolean;
   tooltip?: string | React.ComponentProps<typeof TooltipContent>;
 } & VariantProps<typeof sidebarMenuButtonVariants>) {
-  const Comp = asChild ? Slot.Root : "button";
+  const Comp = "button";
   const { isMobile, state } = useSidebar();
   const button = (
     <Comp
@@ -525,7 +525,7 @@ function SidebarMenuAction({
   asChild?: boolean;
   showOnHover?: boolean;
 }) {
-  const Comp = asChild ? Slot.Root : "button";
+  const Comp = "button";
 
   return (
     <Comp
@@ -636,7 +636,7 @@ function SidebarMenuSubButton({
   size?: "sm" | "md";
   isActive?: boolean;
 }) {
-  const Comp = asChild ? Slot.Root : "a";
+  const Comp = "a";
 
   return (
     <Comp

@@ -1,11 +1,11 @@
 "use client";
 
 import * as React from "react";
-import { Command as CommandPrimitive } from "cmdk";
 import {
   Command,
   CommandEmpty,
   CommandGroup,
+  CommandItem,
   CommandList,
 } from "@/components/ui/command";
 import {
@@ -85,7 +85,7 @@ export interface AutoCompleteProps<TOption extends AutoCompleteOption> {
 }
 
 /**
- * Generic AutoComplete (cmdk-based)
+ * Generic AutoComplete – no cmdk dependency
  * - No filtering by default (shows all options)
  * - Controlled input text + controlled selected value
  * - Clearable action and dropdown toggle icon
@@ -487,11 +487,11 @@ export function AutoCompleteInput<TOption extends AutoCompleteOption>({
                 )}
               </TooltipProvider>
 
-              <CommandPrimitive.Input
+              <input
                 id={fieldId}
-                ref={inputRef}
+                ref={inputRef as React.Ref<HTMLInputElement>}
                 value={inputValue}
-                onValueChange={onInputChange}
+                onChange={(e) => onInputChange(e.target.value)}
                 onBlur={close}
                 onFocus={open}
                 onClick={open}
@@ -502,11 +502,11 @@ export function AutoCompleteInput<TOption extends AutoCompleteOption>({
               />
             </div>
           ) : (
-            <CommandPrimitive.Input
+            <input
               id={fieldId}
-              ref={inputRef}
+              ref={inputRef as React.Ref<HTMLInputElement>}
               value={inputValue}
-              onValueChange={onInputChange}
+              onChange={(e) => onInputChange(e.target.value)}
               onBlur={close}
               onFocus={open}
               onClick={open}
@@ -553,9 +553,9 @@ export function AutoCompleteInput<TOption extends AutoCompleteOption>({
                 >
                   <>
                     {multiSelect && enableSelectAll && items.length > 0 && (
-                      <CommandPrimitive.Item
+                      <CommandItem
                         value={selectAllLabel}
-                        onMouseDown={(e) => e.preventDefault()}
+                        onMouseDown={(e: React.MouseEvent) => e.preventDefault()}
                         onSelect={() => {
                           handleToggleSelectAll();
                           requestAnimationFrame(() => inputRef.current?.focus());
@@ -579,7 +579,7 @@ export function AutoCompleteInput<TOption extends AutoCompleteOption>({
                         <span className="truncate max-w-full font-medium">
                           {allSelected ? `Clear ${selectAllLabel}` : selectAllLabel}
                         </span>
-                      </CommandPrimitive.Item>
+                      </CommandItem>
                     )}
 
                     {items.map((opt) => {
@@ -590,7 +590,7 @@ export function AutoCompleteInput<TOption extends AutoCompleteOption>({
                         : value === optionValue;
 
                       return (
-                        <CommandPrimitive.Item
+                        <CommandItem
                           key={optionValue}
                           value={optionLabel}
                           onMouseDown={(e) => e.preventDefault()} // prevent blur
@@ -631,7 +631,7 @@ export function AutoCompleteInput<TOption extends AutoCompleteOption>({
                               ? renderOption(opt, isSelected)
                               : optionLabel}
                           </span>
-                        </CommandPrimitive.Item>
+                        </CommandItem>
                       );
                     })}
                   </>

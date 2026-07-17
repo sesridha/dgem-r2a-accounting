@@ -63,10 +63,10 @@ export function ComboboxNoSearch({
       </PopoverTrigger>
 
       <PopoverContent
-        className="w-[--radix-popover-trigger-width] p-0"
+        className="w-full p-0"
         align="start"
       >
-        <Command shouldFilter={false}>
+        <Command>
           <CommandList>
             {options.length === 0 ? (
               <CommandEmpty>{emptyText}</CommandEmpty>

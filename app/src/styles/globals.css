@@ -3,57 +3,50 @@
 @tailwind utilities;
 
 /*
- * DGEM Design System – tokens, typography, components, utilities.
- * All CSS variables (colors, fonts, spacing, shadows) come from here.
+ * DGEM Design System — tokens, typography, components, utilities.
+ * Defines all brand primitives: --dgem-*, --grey-*, --color-*, --font-*.
  */
 @import "@dgem/design-system";
 
-/* ── Explicit variable fallbacks (ensures vars are defined even if import resolves late) ── */
+/* ── App-level token overrides ───────────────────────────────────────────────
+ * Placed AFTER @import (non-layered) so these win the cascade over the
+ * design-system :root. No raw hex values — only var(--token) references.
+ * ─────────────────────────────────────────────────────────────────────────── */
+:root {
+  /* Border radius (dimension, not a color token) */
+  --radius: 4px;
+
+  /* Override default grey-200 border → DGEM Light Blue */
+  --color-border: var(--dgem-light-blue);
+  --color-ring:   var(--dgem-light-blue);
+
+  /* Sidebar tokens (app-specific, not shipped by the design system) */
+  --sidebar-bg:        var(--color-card);
+  --sidebar-fg:        var(--color-foreground);
+  --sidebar-border:    var(--dgem-light-blue);
+  --sidebar-active-bg: var(--color-muted);
+  --sidebar-active-fg: var(--color-primary);
+}
+
+/* Dark-mode: keep DGEM Light Blue border + re-map sidebar to dark semantic tokens */
+.dark,
+[data-theme="dark"] {
+  --color-border:      var(--dgem-light-blue);
+  --color-ring:        var(--dgem-light-blue);
+  --sidebar-bg:        var(--color-card);
+  --sidebar-fg:        var(--color-foreground);
+  --sidebar-border:    var(--dgem-light-blue);
+  --sidebar-active-bg: var(--color-muted);
+  --sidebar-active-fg: var(--color-primary);
+}
+
+/* ── Universal base resets ── */
 @layer base {
-  :root {
-    /* Border radius */
-    --radius:                  4px;
-
-    /* Color tokens */
-    --color-background:        #FFFFFF;
-    --color-foreground:        #121A38;
-    --color-card:              #FAFAFA;
-    --color-card-foreground:   #121A38;
-    --color-border:            #1DB8F2;   /* DGEM Light Blue */
-    --color-muted:             #F4F4F5;
-    --color-muted-foreground:  #71717A;
-    --color-primary:           #0058AB;
-    --color-primary-foreground:#FFFFFF;
-    --color-destructive:       #E30021;
-    --color-ring:              #1DB8F2;   /* DGEM Light Blue */
-    --font-sans:               "Ubuntu", system-ui, sans-serif;
-
-    /* Sidebar tokens */
-    --sidebar-bg:              #FAFAFA;
-    --sidebar-fg:              #121A38;
-    --sidebar-border:          #1DB8F2;   /* DGEM Light Blue */
-    --sidebar-active-bg:       #F4F4F5;
-    --sidebar-active-fg:       #0058AB;
-  }
-
-  .dark {
-    --color-background:        #1a1a2e;
-    --color-foreground:        #F4F4F5;
-    --color-card:              #16213e;
-    --color-border:            #1DB8F2;   /* keep brand border in dark mode */
-    --color-muted:             #0f3460;
-    --color-muted-foreground:  #A8A8A8;
-    --sidebar-bg:              #16213e;
-    --sidebar-fg:              #F4F4F5;
-    --sidebar-border:          #1DB8F2;
-  }
-
   * {
     border-color: var(--color-border);
     box-sizing: border-box;
     border-radius: var(--radius);
   }
-
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);

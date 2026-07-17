@@ -6,7 +6,7 @@ import { Skeleton } from "@/components/ui/skeleton";
  */
 export default function LoadingFallback() {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-background">
+    <div className="flex items-center justify-center min-h-screen bg-white">
       <div className="w-full max-w-2xl space-y-4 px-4">
         {/* Header skeleton */}
         <Skeleton className="h-8 w-64" />

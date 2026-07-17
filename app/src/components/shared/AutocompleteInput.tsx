@@ -417,7 +417,7 @@ export function AutoCompleteInput<TOption extends AutoCompleteOption>({
         >
           {label} {required && <span className="text-destructive">*</span>}
           {labelHint && (
-            <span className="ml-1 text-xs text-muted-foreground">
+            <span className="ml-1 text-xs text-grey-600">
               {labelHint}
             </span>
           )}
@@ -436,7 +436,7 @@ export function AutoCompleteInput<TOption extends AutoCompleteOption>({
             inputRef.current?.focus();
           }}
           className={cn(
-            "relative w-full rounded-md border bg-background ring-offset-background text-sm focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 cursor-pointer",
+            "relative w-full rounded-md border bg-white ring-offset-white text-sm focus-within:ring-2 focus-within:ring-[#0058AB] focus-within:ring-offset-2 cursor-pointer",
             multiSelect
               ? "flex h-9 items-center px-2 pr-8"
               : "flex items-center justify-between",
@@ -454,7 +454,7 @@ export function AutoCompleteInput<TOption extends AutoCompleteOption>({
                 return (
                   <span
                     key={optionValue}
-                    className="inline-flex max-w-full items-center gap-1 rounded-md border bg-background px-2 py-1 text-xs"
+                    className="inline-flex max-w-full items-center gap-1 rounded-md border bg-white px-2 py-1 text-xs"
                   >
                     <span className="max-w-28 truncate sm:max-w-36">
                       {optionLabel}
@@ -462,7 +462,7 @@ export function AutoCompleteInput<TOption extends AutoCompleteOption>({
                     <button
                       type="button"
                       aria-label={`Remove ${optionLabel}`}
-                      className="text-muted-foreground hover:text-foreground"
+                      className="text-grey-600 hover:text-foreground"
                       onMouseDown={(e) => e.preventDefault()}
                       onClick={() => handleRemoveSelected(optionValue)}
                     >
@@ -476,7 +476,7 @@ export function AutoCompleteInput<TOption extends AutoCompleteOption>({
                 {hiddenSelectedCount > 0 && (
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <span className="inline-flex items-center rounded-md border bg-muted px-2 py-1 text-xs text-muted-foreground">
+                      <span className="inline-flex items-center rounded-md border bg-muted px-2 py-1 text-xs text-grey-600">
                         +{hiddenSelectedCount}
                       </span>
                     </TooltipTrigger>
@@ -522,7 +522,7 @@ export function AutoCompleteInput<TOption extends AutoCompleteOption>({
             <button
               type="button"
               aria-label="Clear"
-              className="absolute inset-y-0 right-2 flex items-center text-muted-foreground hover:text-foreground"
+              className="absolute inset-y-0 right-2 flex items-center text-grey-600 hover:text-foreground"
               onMouseDown={(e) => e.preventDefault()}
               onClick={handleClear}
               tabIndex={-1}
@@ -533,7 +533,7 @@ export function AutoCompleteInput<TOption extends AutoCompleteOption>({
             <button
               type="button"
               aria-label="Toggle options"
-              className="absolute inset-y-0 right-2 flex items-center text-muted-foreground hover:text-foreground"
+              className="absolute inset-y-0 right-2 flex items-center text-grey-600 hover:text-foreground"
               onMouseDown={(e) => e.preventDefault()}
               onClick={toggle}
               tabIndex={-1}
@@ -548,7 +548,7 @@ export function AutoCompleteInput<TOption extends AutoCompleteOption>({
             <CommandList>
               <div className="absolute left-0 top-full mt-2 z-50 w-full">
                 <CommandGroup
-                  className="relative z-50 min-w-32 rounded-md border shadow-md bg-background overflow-y-auto"
+                  className="relative z-50 min-w-32 rounded-md border border-grey-200 bg-white shadow-md overflow-y-auto"
                   style={{ maxHeight: maxListHeight }}
                 >
                   <>
@@ -570,7 +570,7 @@ export function AutoCompleteInput<TOption extends AutoCompleteOption>({
                             "flex h-4 w-4 shrink-0 items-center justify-center rounded-sm border",
                             allSelected
                               ? "border-primary bg-primary text-primary-foreground"
-                              : "border-border bg-background text-transparent",
+                              : "border-grey-200 bg-white text-[#121A38]",
                           )}
                         >
                           <Check className="h-3 w-3" />
@@ -619,7 +619,7 @@ export function AutoCompleteInput<TOption extends AutoCompleteOption>({
                                 "flex h-4 w-4 shrink-0 items-center justify-center rounded-sm border",
                                 isSelected
                                   ? "border-primary bg-primary text-primary-foreground"
-                                  : "border-border bg-background text-transparent",
+                                  : "border-grey-200 bg-white text-[#121A38]",
                               )}
                             >
                               <Check className="h-3 w-3" />
@@ -637,7 +637,7 @@ export function AutoCompleteInput<TOption extends AutoCompleteOption>({
                   </>
 
                   <CommandEmpty>
-                    <div className="py-3 text-center text-xs text-muted-foreground">
+                    <div className="py-3 text-center text-xs text-grey-600">
                       No options
                     </div>
                   </CommandEmpty>
@@ -656,7 +656,7 @@ export function AutoCompleteInput<TOption extends AutoCompleteOption>({
       ) : helperText ? (
         <p
           id={`${fieldId}-help`}
-          className="mt-1 text-xs text-muted-foreground"
+          className="mt-1 text-xs text-grey-600"
         >
           {helperText}
         </p>

@@ -1,19 +1,16 @@
 /**
- * Pure-React Popover – no Radix UI dependency.
+ * Pure-React Popover – no Radix UI.
+ * Uses position:absolute on a relative wrapper – no portal, no getBoundingClientRect.
  */
 import * as React from "react";
-import { createPortal } from "react-dom";
 import { cn } from "@/lib/utils";
 
 /* ── Context ── */
 interface PopoverContextValue {
   open: boolean
   onOpenChange: (o: boolean) => void
-  triggerRef: React.RefObject<HTMLElement | null>
 }
-const PopoverCtx = React.createContext<PopoverContextValue>({
-  open: false, onOpenChange: () => {}, triggerRef: React.createRef()
-})
+const PopoverCtx = React.createContext<PopoverContextValue>({ open: false, onOpenChange: () => {} })
 
 /* ── Root ── */
 interface PopoverProps {
@@ -25,21 +22,39 @@ interface PopoverProps {
 function Popover({ children, open: controlledOpen, defaultOpen = false, onOpenChange }: PopoverProps) {
   const [uncontrolled, setUncontrolled] = React.useState(defaultOpen)
   const isOpen = controlledOpen ?? uncontrolled
-  const triggerRef = React.useRef<HTMLElement>(null)
-  const handleOpenChange = (o: boolean) => { setUncontrolled(o); onOpenChange?.(o) }
+  const wrapperRef = React.useRef<HTMLDivElement>(null)
+
+  const handleOpenChange = React.useCallback((o: boolean) => {
+    setUncontrolled(o)
+    onOpenChange?.(o)
+  }, [onOpenChange])
+
+  /* Close on outside click */
+  React.useEffect(() => {
+    if (!isOpen) return
+    const close = (e: MouseEvent) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+        handleOpenChange(false)
+      }
+    }
+    document.addEventListener("mousedown", close)
+    return () => document.removeEventListener("mousedown", close)
+  }, [isOpen, handleOpenChange])
+
   return (
-    <PopoverCtx.Provider value={{ open: isOpen, onOpenChange: handleOpenChange, triggerRef }}>
-      {children}
+    <PopoverCtx.Provider value={{ open: isOpen, onOpenChange: handleOpenChange }}>
+      <div ref={wrapperRef} className="relative inline-block w-full">
+        {children}
+      </div>
     </PopoverCtx.Provider>
   )
 }
 
-/* ── Trigger ── */
+/* ── Trigger – just toggles the popover on click ── */
 function PopoverTrigger({ children, asChild: _asChild }: { children: React.ReactNode; asChild?: boolean }) {
-  const { open, onOpenChange, triggerRef } = React.useContext(PopoverCtx)
+  const { open, onOpenChange } = React.useContext(PopoverCtx)
   const child = React.Children.only(children) as React.ReactElement<React.HTMLAttributes<HTMLElement>>
   return React.cloneElement(child, {
-    ref: triggerRef as React.Ref<HTMLElement>,
     onClick: (e: React.MouseEvent) => {
       onOpenChange(!open)
       child.props.onClick?.(e as React.MouseEvent<HTMLElement>)
@@ -47,57 +62,40 @@ function PopoverTrigger({ children, asChild: _asChild }: { children: React.React
   })
 }
 
-/* ── Anchor (no-op for API compat) ── */
+/* ── Anchor (no-op) ── */
 function PopoverAnchor({ children }: { children?: React.ReactNode }) {
   return <>{children}</>
 }
 
-/* ── Content ── */
+/* ── Content (absolute below trigger) ── */
 interface PopoverContentProps extends React.HTMLAttributes<HTMLDivElement> {
   align?: "start" | "center" | "end"
   sideOffset?: number
   side?: "top" | "bottom" | "left" | "right"
 }
-
 const PopoverContent = React.forwardRef<HTMLDivElement, PopoverContentProps>(
-  ({ className, align = "center", sideOffset = 4, children, ...props }, ref) => {
-    const { open, onOpenChange, triggerRef } = React.useContext(PopoverCtx)
-    const [pos, setPos] = React.useState({ top: 0, left: 0 })
-
-    React.useEffect(() => {
-      if (open && triggerRef.current) {
-        const r = triggerRef.current.getBoundingClientRect()
-        setPos({ top: r.bottom + sideOffset, left: r.left })
-      }
-    }, [open, triggerRef, sideOffset])
-
-    React.useEffect(() => {
-      if (!open) return
-      const close = (e: MouseEvent) => {
-        const target = e.target as Node
-        if (!triggerRef.current?.contains(target)) onOpenChange(false)
-      }
-      document.addEventListener("mousedown", close)
-      return () => document.removeEventListener("mousedown", close)
-    }, [open, onOpenChange, triggerRef])
-
+  ({ className, align = "start", sideOffset = 4, children, side = "bottom", ...props }, ref) => {
+    const { open } = React.useContext(PopoverCtx)
     if (!open) return null
-    return createPortal(
+
+    const alignClass = align === "end" ? "right-0" : align === "center" ? "left-1/2 -translate-x-1/2" : "left-0"
+    const sideClass = side === "top" ? `bottom-[calc(100%+${sideOffset}px)]` : `top-[calc(100%+${sideOffset}px)]`
+
+    return (
       <div
         ref={ref}
-        onMouseDown={(e) => e.stopPropagation()}
         className={cn(
-          "fixed z-50 min-w-[18rem] rounded-md border",
-          "bg-white text-[#121A38] p-4 shadow-md outline-none",
+          "absolute z-50 w-full min-w-[12rem]",
+          "rounded-md border border-grey-200 bg-white shadow-md p-2",
           "animate-in fade-in-0 zoom-in-95",
+          alignClass,
+          sideClass,
           className
         )}
-        style={{ top: pos.top, left: pos.left }}
         {...props}
       >
         {children}
-      </div>,
-      document.body
+      </div>
     )
   }
 )

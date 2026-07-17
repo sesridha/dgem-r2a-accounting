@@ -630,7 +630,7 @@ export function DataTableView<T>({
 
             {showFilteredCount &&
               (enableGlobalFilter || enableColumnFilters) && (
-                <span className="text-xs text-muted-foreground sm:self-center">
+                <span className="text-xs text-grey-600 sm:self-center">
                   {filteredRowCount} of{" "}
                   {table.getPrePaginationRowModel().rows.length} rows
                 </span>
@@ -928,7 +928,7 @@ export function DataTableView<T>({
               <TableRow>
                 <TableCell
                   colSpan={table.getVisibleLeafColumns().length}
-                  className="h-32 text-center text-muted-foreground"
+                  className="h-32 text-center text-grey-600"
                 >
                   {emptyState ?? emptyMessage}
                 </TableCell>
@@ -972,7 +972,7 @@ export function DataTableView<T>({
       {showPagination && !loading && rows.length > 0 && (
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 px-2">
           {/* Left section */}
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <div className="flex items-center gap-2 text-sm text-grey-600">
             <span>Showing</span>
 
             <Select
@@ -998,7 +998,7 @@ export function DataTableView<T>({
 
           {/* Right section */}
           <div className="flex items-center justify-between md:justify-end gap-4">
-            <div className="text-sm text-muted-foreground">
+            <div className="text-sm text-grey-600">
               {startIndex}-{endIndex} of {totalItems}
             </div>
 

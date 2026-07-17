@@ -7,13 +7,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command";
 import { Button } from "@/components/ui/button";
 
 type Option = {
@@ -55,49 +48,49 @@ export function ComboboxNoSearch({
           className={cn("w-full justify-between", className)}
           disabled={disabled}
         >
-          <span className={selectedLabel ? "" : "text-muted-foreground"}>
+          <span className={selectedLabel ? "" : "text-grey-400"}>
             {selectedLabel || placeholder}
           </span>
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent
-        className="w-full p-0"
-        align="start"
-      >
-        <Command>
-          <CommandList>
-            {options.length === 0 ? (
-              <CommandEmpty>{emptyText}</CommandEmpty>
-            ) : (
-              <CommandGroup>
-                {options.map((option) => {
-                  const isSelected = value === option.value;
-                  return (
-                    <CommandItem
-                      key={option.value}
-                      // keep value for keyboard navigation semantics
-                      value={option.value}
-                      onSelect={() => {
-                        onValueChange?.(option.value);
-                        setOpen(false);
-                      }}
-                    >
-                      <Check
-                        className={cn(
-                          "mr-2 h-4 w-4",
-                          isSelected ? "opacity-100" : "opacity-0",
-                        )}
-                      />
-                      {option.label}
-                    </CommandItem>
-                  );
-                })}
-              </CommandGroup>
-            )}
-          </CommandList>
-        </Command>
+      <PopoverContent className="p-0" align="start">
+        {options.length === 0 ? (
+          <p className="py-4 text-center text-sm text-grey-600">{emptyText}</p>
+        ) : (
+          <div className="max-h-60 overflow-y-auto py-1">
+            {options.map((option) => {
+              const isSelected = value === option.value;
+              return (
+                <div
+                  key={option.value}
+                  role="option"
+                  aria-selected={isSelected}
+                  /* use onMouseDown so click fires before blur closes the popover */
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                    onValueChange?.(option.value);
+                    setOpen(false);
+                  }}
+                  className={cn(
+                    "relative flex cursor-pointer select-none items-center rounded-sm px-3 py-2 text-sm",
+                    "text-[#121A38] transition-colors hover:bg-grey-100",
+                    isSelected && "bg-grey-100 font-medium",
+                  )}
+                >
+                  <Check
+                    className={cn(
+                      "mr-2 h-4 w-4 text-[#0058AB]",
+                      isSelected ? "opacity-100" : "opacity-0",
+                    )}
+                  />
+                  {option.label}
+                </div>
+              );
+            })}
+          </div>
+        )}
       </PopoverContent>
     </Popover>
   );

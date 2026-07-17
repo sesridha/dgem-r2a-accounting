@@ -1,11 +1,9 @@
 /**
- * Pure-React Select – no Radix UI dependency.
- * Uses a native <select> styled with dgem-input, plus a
- * custom dropdown list for richer UI when needed.
+ * Pure-React Select – no Radix UI.
+ * Uses position:absolute on a relative wrapper – no portal, no getBoundingClientRect.
  */
 import * as React from "react"
 import { Check, ChevronDown } from "lucide-react"
-import { createPortal } from "react-dom"
 import { cn } from "@/lib/utils"
 
 /* ── Context ── */
@@ -13,11 +11,10 @@ interface SelectContextValue {
   value: string
   onValueChange: (v: string) => void
   open: boolean
-  setOpen: (o: boolean) => void
-  triggerRef: React.RefObject<HTMLButtonElement | null>
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 const SelectCtx = React.createContext<SelectContextValue>({
-  value: "", onValueChange: () => {}, open: false, setOpen: () => {}, triggerRef: React.createRef()
+  value: "", onValueChange: () => {}, open: false, setOpen: () => {},
 })
 
 /* ── Root ── */
@@ -31,16 +28,32 @@ interface SelectProps {
 function Select({ children, value: controlledValue, defaultValue = "", onValueChange }: SelectProps) {
   const [uncontrolled, setUncontrolled] = React.useState(defaultValue)
   const [open, setOpen] = React.useState(false)
-  const triggerRef = React.useRef<HTMLButtonElement>(null)
   const value = controlledValue ?? uncontrolled
-  const handleValueChange = (v: string) => {
+
+  const handleValueChange = React.useCallback((v: string) => {
     setUncontrolled(v)
     onValueChange?.(v)
     setOpen(false)
-  }
+  }, [onValueChange])
+
+  /* Close on outside click */
+  const wrapperRef = React.useRef<HTMLDivElement>(null)
+  React.useEffect(() => {
+    if (!open) return
+    const close = (e: MouseEvent) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+        setOpen(false)
+      }
+    }
+    document.addEventListener("mousedown", close)
+    return () => document.removeEventListener("mousedown", close)
+  }, [open])
+
   return (
-    <SelectCtx.Provider value={{ value, onValueChange: handleValueChange, open, setOpen, triggerRef }}>
-      {children}
+    <SelectCtx.Provider value={{ value, onValueChange: handleValueChange, open, setOpen }}>
+      <div ref={wrapperRef} className="relative w-full">
+        {children}
+      </div>
     </SelectCtx.Provider>
   )
 }
@@ -51,74 +64,52 @@ function SelectGroup({ children }: { children?: React.ReactNode }) {
 
 function SelectValue({ placeholder }: { placeholder?: string }) {
   const { value } = React.useContext(SelectCtx)
-  return <span className={value ? "" : "text-[var(--color-muted-foreground)]"}>{value || placeholder}</span>
+  return <span className={value ? "" : "text-grey-400"}>{value || placeholder}</span>
 }
 
 /* ── Trigger ── */
 const SelectTrigger = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTMLButtonElement>>(
   ({ className, children, onClick, ...props }, ref) => {
-    const { setOpen, open, triggerRef } = React.useContext(SelectCtx)
+    const { setOpen, open } = React.useContext(SelectCtx)
     return (
       <button
-        ref={(el) => {
-          (triggerRef as React.MutableRefObject<HTMLButtonElement | null>).current = el
-          if (typeof ref === 'function') ref(el)
-          else if (ref) (ref as React.MutableRefObject<HTMLButtonElement | null>).current = el
-        }}
+        ref={ref}
         type="button"
-        onClick={(e) => { setOpen(!open); onClick?.(e) }}
+        onClick={(e) => { setOpen((o) => !o); onClick?.(e) }}
         className={cn(
-          "dgem-input flex items-center justify-between cursor-pointer",
+          "dgem-input flex items-center justify-between cursor-pointer w-full text-left",
+          open && "border-[var(--dgem-light-blue,#1DB8F2)]",
           className
         )}
+        aria-expanded={open}
         {...props}
       >
         {children}
-        <ChevronDown className="h-4 w-4 opacity-50 ml-2 shrink-0" />
+        <ChevronDown className={cn("h-4 w-4 opacity-50 ml-2 shrink-0 transition-transform", open && "rotate-180")} />
       </button>
     )
   }
 )
 SelectTrigger.displayName = "SelectTrigger"
 
-/* Scroll helpers – no-ops for API compat */
-function SelectScrollUpButton({ className: _c }: { className?: string }) { return null }
-function SelectScrollDownButton({ className: _c }: { className?: string }) { return null }
-
-/* ── Content ── */
+/* ── Content (absolute, no portal) ── */
 const SelectContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement> & { position?: string }>(
   ({ className, children, ...props }, ref) => {
-    const { open, setOpen, triggerRef } = React.useContext(SelectCtx)
-    const [rect, setRect] = React.useState<DOMRect | null>(null)
-
-    React.useEffect(() => {
-      if (open && triggerRef.current) setRect(triggerRef.current.getBoundingClientRect())
-    }, [open, triggerRef])
-
-    React.useEffect(() => {
-      if (!open) return
-      const close = () => setOpen(false)
-      document.addEventListener("mousedown", close)
-      return () => document.removeEventListener("mousedown", close)
-    }, [open, setOpen])
-
-    if (!open || !rect) return null
-    return createPortal(
+    const { open } = React.useContext(SelectCtx)
+    if (!open) return null
+    return (
       <div
         ref={ref}
-        onMouseDown={(e) => e.stopPropagation()}
         className={cn(
-          "fixed z-50 min-w-[8rem] overflow-hidden rounded-md border",
-          "bg-white text-[#121A38] shadow-md",
-          "animate-in fade-in-0 zoom-in-95",
+          "absolute left-0 top-[calc(100%+4px)] z-50 w-full",
+          "rounded-md border border-grey-200 bg-white shadow-md",
+          "max-h-72 overflow-y-auto",
           className
         )}
-        style={{ top: rect.bottom + 4, left: rect.left, width: rect.width }}
         {...props}
       >
         <div className="p-1">{children}</div>
-      </div>,
-      document.body
+      </div>
     )
   }
 )
@@ -127,7 +118,7 @@ SelectContent.displayName = "SelectContent"
 /* ── Label ── */
 const SelectLabel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn("px-2 py-1.5 text-sm font-semibold", className)} {...props} />
+    <div ref={ref} className={cn("px-2 py-1.5 text-xs font-semibold text-grey-600", className)} {...props} />
   )
 )
 SelectLabel.displayName = "SelectLabel"
@@ -147,10 +138,11 @@ const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
         role="option"
         aria-selected={isSelected}
         aria-disabled={disabled}
-        onClick={() => !disabled && onValueChange(value)}
+        onMouseDown={(e) => { e.preventDefault(); if (!disabled) onValueChange(value) }}
         className={cn(
-          "relative flex w-full cursor-pointer select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none",
-          "hover:bg-grey-100 hover:text-[#121A38]",
+          "relative flex w-full cursor-pointer select-none items-center rounded-sm py-2 pl-3 pr-8 text-sm",
+          "text-[#121A38] transition-colors",
+          "hover:bg-grey-100",
           isSelected && "bg-grey-100 font-medium",
           disabled && "pointer-events-none opacity-50",
           className
@@ -159,7 +151,7 @@ const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
       >
         {isSelected && (
           <span className="absolute right-2 flex h-3.5 w-3.5 items-center justify-center">
-            <Check className="h-4 w-4" />
+            <Check className="h-4 w-4 text-[var(--dgem-blue,#0058AB)]" />
           </span>
         )}
         {children}
@@ -172,20 +164,15 @@ SelectItem.displayName = "SelectItem"
 /* ── Separator ── */
 const SelectSeparator = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn("-mx-1 my-1 h-px bg-grey-100", className)} {...props} />
+    <div ref={ref} className={cn("-mx-1 my-1 h-px bg-grey-200", className)} {...props} />
   )
 )
 SelectSeparator.displayName = "SelectSeparator"
 
+function SelectScrollUpButton({ className: _c }: { className?: string }) { return null }
+function SelectScrollDownButton({ className: _c }: { className?: string }) { return null }
+
 export {
-  Select,
-  SelectGroup,
-  SelectValue,
-  SelectTrigger,
-  SelectContent,
-  SelectLabel,
-  SelectItem,
-  SelectSeparator,
-  SelectScrollUpButton,
-  SelectScrollDownButton,
+  Select, SelectGroup, SelectValue, SelectTrigger, SelectContent,
+  SelectLabel, SelectItem, SelectSeparator, SelectScrollUpButton, SelectScrollDownButton,
 }

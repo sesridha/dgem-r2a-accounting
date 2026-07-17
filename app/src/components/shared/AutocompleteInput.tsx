@@ -427,14 +427,23 @@ export function AutoCompleteInput<TOption extends AutoCompleteOption>({
         onKeyDown={onKeyDown}
         className={cn("overflow-visible", className)}
       >
-        {/* Input wrapper */}
+        {/* Input wrapper
+            - `border`                          → sets border-width: 1px  (required — Tailwind
+                                                  preflight resets border-width to 0)
+            - `border-[var(--dgem-light-blue)]` → sets border-color to the DGEM Light Blue token
+            - `focus-within:ring-[var(--dgem-blue)]` → focus ring uses token, no hardcoded hex
+            - `rounded-[var(--radius)]`         → honours the app-level --radius: 4px token
+        */}
         <div
           onClick={() => {
             open();
             inputRef.current?.focus();
           }}
           className={cn(
-            "relative w-full rounded-md border-[var(--dgem-light-blue)] bg-white ring-offset-white text-sm focus-within:ring-2 focus-within:ring-[#0058AB] focus-within:ring-offset-2 cursor-pointer rounded-[8px]",
+            "relative w-full bg-white text-sm cursor-pointer",
+            "border border-[var(--dgem-light-blue)]",
+            "rounded-[var(--radius)]",
+            "focus-within:ring-2 focus-within:ring-[var(--dgem-blue)] focus-within:ring-offset-2 ring-offset-white",
             multiSelect
               ? "flex h-9 items-center px-2 pr-8"
               : "flex items-center justify-between",
@@ -452,7 +461,7 @@ export function AutoCompleteInput<TOption extends AutoCompleteOption>({
                 return (
                   <span
                     key={optionValue}
-                    className="inline-flex max-w-full items-center gap-1 rounded-md border bg-white px-2 py-1 text-xs"
+                    className="inline-flex max-w-full items-center gap-1 rounded-[var(--radius)] border border-[var(--color-border)] bg-white px-2 py-1 text-xs"
                   >
                     <span className="max-w-28 truncate sm:max-w-36">
                       {optionLabel}
@@ -474,7 +483,7 @@ export function AutoCompleteInput<TOption extends AutoCompleteOption>({
                 {hiddenSelectedCount > 0 && (
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <span className="inline-flex items-center rounded-md border bg-muted px-2 py-1 text-xs text-grey-600">
+                      <span className="inline-flex items-center rounded-[var(--radius)] border border-[var(--color-border)] bg-muted px-2 py-1 text-xs text-grey-600">
                         +{hiddenSelectedCount}
                       </span>
                     </TooltipTrigger>
@@ -496,7 +505,7 @@ export function AutoCompleteInput<TOption extends AutoCompleteOption>({
                 placeholder={placeholder}
                 aria-invalid={ariaInvalid || undefined}
                 aria-describedby={describedById}
-                className="h-7 min-w-16 flex-1 bg-transparent px-1 text-sm rounded-md outline-none cursor-pointer"
+                className="h-7 min-w-16 flex-1 bg-transparent px-1 text-sm rounded-[var(--radius)] outline-none cursor-pointer"
               />
             </div>
           ) : (
@@ -512,7 +521,7 @@ export function AutoCompleteInput<TOption extends AutoCompleteOption>({
               aria-invalid={ariaInvalid || undefined}
               aria-describedby={describedById}
               className={cn(
-                "w-full rounded-md outline-none cursor-pointer",
+                "w-full rounded-[var(--radius)] outline-none cursor-pointer",
                 inputSize,
               )}
             />
@@ -548,105 +557,105 @@ export function AutoCompleteInput<TOption extends AutoCompleteOption>({
           <div className="relative h-0">
             {/* Absolute panel – must be OUTSIDE CommandList to avoid overflow clipping */}
             <div className="absolute left-0 top-0 mt-1 z-50 w-full">
-              <CommandGroup
-                className="relative z-50 min-w-32 rounded-md border border-grey-200 bg-white shadow-md overflow-y-auto"
-                style={{ maxHeight: maxListHeight }}
-              >
-                <>
-                  {multiSelect && enableSelectAll && items.length > 0 && (
-                    <CommandItem
-                      value={selectAllLabel}
-                      onMouseDown={(e: React.MouseEvent) => e.preventDefault()}
-                      onSelect={() => {
-                        handleToggleSelectAll();
-                        requestAnimationFrame(() => inputRef.current?.focus());
-                      }}
-                      className={cn(
-                        "flex w-full items-center cursor-pointer gap-2 overflow-hidden border-b aria-selected:bg-accent aria-selected:text-accent-foreground hover:bg-accent hover:text-accent-foreground",
-                        itemPadding,
-                      )}
-                    >
-                      <span
-                        className={cn(
-                          "flex h-4 w-4 shrink-0 items-center justify-center rounded-sm border",
-                          allSelected
-                            ? "border-primary bg-primary text-primary-foreground"
-                            : "border-grey-200 bg-white text-[#121A38]",
-                        )}
-                      >
-                        <Check className="h-3 w-3" />
-                      </span>
-
-                      <span className="truncate max-w-full font-medium">
-                        {allSelected
-                          ? `Clear ${selectAllLabel}`
-                          : selectAllLabel}
-                      </span>
-                    </CommandItem>
-                  )}
-
-                  {items.map((opt) => {
-                    const optionValue = getOptionValue(opt);
-                    const optionLabel = getOptionLabel(opt);
-                    const isSelected = multiSelect
-                      ? selectedSet.has(optionValue)
-                      : value === optionValue;
-
-                    return (
+                <CommandGroup
+                  className="relative z-50 min-w-32 rounded-[var(--radius)] border border-[var(--color-border)] bg-white shadow-md overflow-y-auto"
+                  style={{ maxHeight: maxListHeight }}
+                >
+                  <>
+                    {multiSelect && enableSelectAll && items.length > 0 && (
                       <CommandItem
-                        key={optionValue}
-                        value={optionLabel}
-                        onMouseDown={(e) => e.preventDefault()} // prevent blur
+                        value={selectAllLabel}
+                        onMouseDown={(e: React.MouseEvent) => e.preventDefault()}
                         onSelect={() => {
-                          if (multiSelect) {
-                            handleToggleMultiSelect(optionValue);
-                            onInputChange("");
-                          } else {
-                            onInputChange(optionLabel);
-                            onChange?.(optionValue, opt);
-                          }
-                          onAfterSelectOpenDialog?.();
-                          if (!multiSelect && closeOnSelect) close();
-                          requestAnimationFrame(() =>
-                            inputRef.current?.focus(),
-                          );
+                          handleToggleSelectAll();
+                          requestAnimationFrame(() => inputRef.current?.focus());
                         }}
                         className={cn(
-                          "flex w-full items-center cursor-pointer gap-2 overflow-hidden aria-selected:bg-accent aria-selected:text-accent-foreground hover:bg-accent hover:text-accent-foreground",
+                          "flex w-full items-center cursor-pointer gap-2 overflow-hidden border-b aria-selected:bg-accent aria-selected:text-accent-foreground hover:bg-accent hover:text-accent-foreground",
                           itemPadding,
                         )}
                       >
-                        {multiSelect && (
-                          <span
-                            className={cn(
-                              "flex h-4 w-4 shrink-0 items-center justify-center rounded-sm border",
-                              isSelected
-                                ? "border-primary bg-primary text-primary-foreground"
-                                : "border-grey-200 bg-white text-[#121A38]",
-                            )}
-                          >
-                            <Check className="h-3 w-3" />
-                          </span>
-                        )}
+                        <span
+                          className={cn(
+                            "flex h-4 w-4 shrink-0 items-center justify-center rounded-sm border",
+                            allSelected
+                              ? "border-primary bg-primary text-primary-foreground"
+                              : "border-[var(--color-border)] bg-white text-foreground",
+                          )}
+                        >
+                          <Check className="h-3 w-3" />
+                        </span>
 
-                        <span className="truncate max-w-full">
-                          {renderOption
-                            ? renderOption(opt, isSelected)
-                            : optionLabel}
+                        <span className="truncate max-w-full font-medium">
+                          {allSelected
+                            ? `Clear ${selectAllLabel}`
+                            : selectAllLabel}
                         </span>
                       </CommandItem>
-                    );
-                  })}
-                </>
+                    )}
 
-                {items.length === 0 && (
-                  <CommandEmpty>
-                    <div className="py-3 text-center text-xs text-grey-600">
-                      No options
-                    </div>
-                  </CommandEmpty>
-                )}
-              </CommandGroup>
+                    {items.map((opt) => {
+                      const optionValue = getOptionValue(opt);
+                      const optionLabel = getOptionLabel(opt);
+                      const isSelected = multiSelect
+                        ? selectedSet.has(optionValue)
+                        : value === optionValue;
+
+                      return (
+                        <CommandItem
+                          key={optionValue}
+                          value={optionLabel}
+                          onMouseDown={(e) => e.preventDefault()} // prevent blur
+                          onSelect={() => {
+                            if (multiSelect) {
+                              handleToggleMultiSelect(optionValue);
+                              onInputChange("");
+                            } else {
+                              onInputChange(optionLabel);
+                              onChange?.(optionValue, opt);
+                            }
+                            onAfterSelectOpenDialog?.();
+                            if (!multiSelect && closeOnSelect) close();
+                            requestAnimationFrame(() =>
+                              inputRef.current?.focus(),
+                            );
+                          }}
+                          className={cn(
+                            "flex w-full items-center cursor-pointer gap-2 overflow-hidden aria-selected:bg-accent aria-selected:text-accent-foreground hover:bg-accent hover:text-accent-foreground",
+                            itemPadding,
+                          )}
+                        >
+                          {multiSelect && (
+                            <span
+                              className={cn(
+                                "flex h-4 w-4 shrink-0 items-center justify-center rounded-sm border",
+                                isSelected
+                                  ? "border-primary bg-primary text-primary-foreground"
+                                  : "border-[var(--color-border)] bg-white text-foreground",
+                              )}
+                            >
+                              <Check className="h-3 w-3" />
+                            </span>
+                          )}
+
+                          <span className="truncate max-w-full">
+                            {renderOption
+                              ? renderOption(opt, isSelected)
+                              : optionLabel}
+                          </span>
+                        </CommandItem>
+                      );
+                    })}
+                  </>
+
+                  {items.length === 0 && (
+                    <CommandEmpty>
+                      <div className="py-3 text-center text-xs text-grey-600">
+                        No options
+                      </div>
+                    </CommandEmpty>
+                  )}
+                </CommandGroup>
             </div>
           </div>
         )}

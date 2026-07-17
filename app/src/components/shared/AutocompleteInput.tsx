@@ -430,7 +430,7 @@ export function AutoCompleteInput<TOption extends AutoCompleteOption>({
         {/* Input wrapper
             - `border`                          → sets border-width: 1px  (required — Tailwind
                                                   preflight resets border-width to 0)
-            - `border-[var(--dgem-light-blue)]` → sets border-color to the DGEM Light Blue token
+            - `border-dgem-light-blue` → sets border-color to the DGEM Light Blue token
             - `focus-within:ring-[var(--dgem-blue)]` → focus ring uses token, no hardcoded hex
             - `rounded-[var(--radius)]`         → honours the app-level --radius: 4px token
         */}
@@ -441,9 +441,9 @@ export function AutoCompleteInput<TOption extends AutoCompleteOption>({
           }}
           className={cn(
             "relative w-full bg-white text-sm cursor-pointer",
-            "border border-[var(--dgem-light-blue)]",
+            "border border-dgem-light-blue",
             "rounded-[var(--radius)]",
-            "focus-within:ring-2 focus-within:ring-[var(--dgem-blue)] focus-within:ring-offset-2 ring-offset-white",
+            "focus-within:ring-dgem",
             multiSelect
               ? "flex h-9 items-center px-2 pr-8"
               : "flex items-center justify-between",

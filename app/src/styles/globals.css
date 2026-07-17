@@ -11,23 +11,27 @@
 /* ── Explicit variable fallbacks (ensures vars are defined even if import resolves late) ── */
 @layer base {
   :root {
+    /* Border radius */
+    --radius:                  4px;
+
+    /* Color tokens */
     --color-background:        #FFFFFF;
     --color-foreground:        #121A38;
     --color-card:              #FAFAFA;
     --color-card-foreground:   #121A38;
-    --color-border:            #E5E5E5;
+    --color-border:            #1DB8F2;   /* DGEM Light Blue */
     --color-muted:             #F4F4F5;
     --color-muted-foreground:  #71717A;
     --color-primary:           #0058AB;
     --color-primary-foreground:#FFFFFF;
     --color-destructive:       #E30021;
-    --color-ring:              #0058AB;
+    --color-ring:              #1DB8F2;   /* DGEM Light Blue */
     --font-sans:               "Ubuntu", system-ui, sans-serif;
 
-    /* Sidebar tokens (used by dgem-sidebar and related classes) */
+    /* Sidebar tokens */
     --sidebar-bg:              #FAFAFA;
     --sidebar-fg:              #121A38;
-    --sidebar-border:          #E5E5E5;
+    --sidebar-border:          #1DB8F2;   /* DGEM Light Blue */
     --sidebar-active-bg:       #F4F4F5;
     --sidebar-active-fg:       #0058AB;
   }
@@ -36,17 +40,18 @@
     --color-background:        #1a1a2e;
     --color-foreground:        #F4F4F5;
     --color-card:              #16213e;
-    --color-border:            rgba(255,255,255,0.1);
+    --color-border:            #1DB8F2;   /* keep brand border in dark mode */
     --color-muted:             #0f3460;
     --color-muted-foreground:  #A8A8A8;
     --sidebar-bg:              #16213e;
     --sidebar-fg:              #F4F4F5;
-    --sidebar-border:          rgba(255,255,255,0.1);
+    --sidebar-border:          #1DB8F2;
   }
 
   * {
     border-color: var(--color-border);
     box-sizing: border-box;
+    border-radius: var(--radius);
   }
 
   body {

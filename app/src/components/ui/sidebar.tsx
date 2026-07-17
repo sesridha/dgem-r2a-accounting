@@ -3,6 +3,7 @@
  * Uses @dgem/design-system dgem-sidebar / dgem-sidebar-link classes.
  */
 import * as React from "react";
+import { cva, type VariantProps } from "class-variance-authority";
 
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";

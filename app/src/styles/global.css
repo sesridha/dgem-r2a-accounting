@@ -1,12 +1,12 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 /*
  * DGEM Design System — all brand tokens, typography, components, utilities.
  * Source of truth: package/src/css/tokens.css
  */
 @import "@dgem/design-system";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /*
  * App-specific tokens only — nothing that already exists in tokens.css.
@@ -14,13 +14,34 @@
  *   --sidebar-* : sidebar tokens not shipped by the package
  *                 (reference semantic tokens so dark-mode is automatic)
  */
+
 :root {
-  --radius:            4px;
-  --sidebar-bg:        var(--color-card);
-  --sidebar-fg:        var(--color-foreground);
-  --sidebar-border:    var(--color-border);
+  --radius: 4px;
+  --sidebar-bg: var(--color-card);
+  --sidebar-fg: var(--color-foreground);
+  --sidebar-border: var(--color-border);
   --sidebar-active-bg: var(--color-muted);
   --sidebar-active-fg: var(--color-primary);
+}
+
+.gradient-bg {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 132px;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 47, 75, 0.3) 0%,
+    rgba(255, 178, 74, 0.3) 11%,
+    rgba(0, 230, 227, 0.3) 41.5%,
+    rgba(1, 176, 245, 0.3) 69.5%,
+    rgba(229, 87, 173, 0.3) 93%,
+    rgba(255, 47, 75, 0.3) 100%
+  );
+  filter: blur(134px);
 }
 
 @layer base {
@@ -32,12 +53,12 @@
    * unpredictable results across the whole app.
    */
   *:not(.gradient-bg) {
-    box-sizing:    border-box;
+    box-sizing: border-box;
     border-radius: var(--radius);
   }
   body {
-    color:       var(--color-foreground);
+    color: var(--color-foreground);
     font-family: var(--font-sans);
-    margin:      0;
+    margin: 0;
   }
 }

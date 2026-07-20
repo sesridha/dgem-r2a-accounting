@@ -1,15 +1,14 @@
-/** @type {import('tailwindcss').Config} */
-const dgemPreset = require('../package/tailwind.config.js')
+import dgemPresetModule from "../package/tailwind.config.js";
 
-module.exports = {
+console.log("DGEM PRESET =", dgemPresetModule);
+
+const dgemPreset = dgemPresetModule.default || dgemPresetModule;
+
+export default {
   presets: [dgemPreset],
-  darkMode: 'class',
   content: [
-    './index.html',
-    './src/**/*.{ts,tsx,js,jsx}',
+    "./index.html",
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "../package/src/**/*.{js,jsx,ts,tsx}",
   ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-}
+};
